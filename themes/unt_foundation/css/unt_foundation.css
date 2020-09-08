@@ -1155,7 +1155,7 @@ ul.slicknav_nav li.mm-ctas-wrapper .mm-ctas {
   width: 200px;
   height: 140px;
   background-color: #fff;
-  background-image: url(/traditions-unt-edu/sites/default/files/130_year_marks_final_rgb-01.png);
+  background-image: url('/sites/default/files/130_year_marks_final_rgb-01.png');
   background-size: contain;
   background-position-y: 10px;
   background-position-x: 10px;
