@@ -1,0 +1,7 @@
+global:
+  version: 0.1
+  css:
+    base:
+      css/unt_foundation.css: {}
+  js:
+    js/unt_foundation.js: {}

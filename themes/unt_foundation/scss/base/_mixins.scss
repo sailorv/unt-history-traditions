@@ -1,0 +1,807 @@
+//
+//  ██████  ██████  ███████ ███████ ██ ██   ██ ███████ ███████
+//  ██   ██ ██   ██ ██      ██      ██  ██ ██  ██      ██
+//  ██████  ██████  █████   █████   ██   ███   █████   ███████
+//  ██      ██   ██ ██      ██      ██  ██ ██  ██           ██
+//  ██      ██   ██ ███████ ██      ██ ██   ██ ███████ ███████
+//
+// THIS PREFIX MIXING THINGY from ANDY.SCSS
+// Mixin helper to output vendor-prefixed CSS
+// @access private
+// @author HugoGiraudel
+// @param {String} $property - Unprefixed CSS property
+// @param {*} $value - Raw CSS value
+// @param {List} $prefixes [()] - List of prefixes to output
+// @mixin prefix($property, $value, $prefixes: ()) {
+//   @each $prefix in $prefixes {
+//     -#{$prefix}-#{$property}: $value;
+//   }
+//
+//   #{$property}: $value;
+// }
+
+// Sass CSS3 Mixins! The Cross-Browser CSS3 Sass Library
+// By: Matthieu Aussaguel, http://www.mynameismatthieu.com, @matthieu_tweets
+// Adds a browser prefix to the property
+// @param {*} $property Property
+// @param {*} $value Value
+
+// @mixin css3-prefix($property, $value) {
+//   -webkit-#{$property}: #{$value};
+//    -khtml-#{$property}: #{$value};
+//      -moz-#{$property}: #{$value};
+//       -ms-#{$property}: #{$value};
+//        -o-#{$property}: #{$value};
+//           #{$property}: #{$value};
+// }
+
+@mixin prefixes($property, $value) {
+  -webkit-#{$property}: #{$value};
+     -moz-#{$property}: #{$value};
+      -ms-#{$property}: #{$value};
+       -o-#{$property}: #{$value};
+          #{$property}: #{$value};
+}
+
+//
+//  ████████ ██    ██ ██████  ███████
+//     ██     ██  ██  ██   ██ ██
+//     ██      ████   ██████  █████
+//     ██       ██    ██      ██
+//     ██       ██    ██      ███████
+//
+//  EM/REM FALLBACK appended with EMs: http://zerosixthree.se/
+//
+@function calculateEm($size) {
+  $emSize: $size / $base-font;
+  @return $emSize * 1em;
+}
+
+@function calculateRem($size) {
+  $remSize: $size / $base-font;
+  @return $remSize * 1rem;
+}
+
+@mixin font-size($size) {
+  font-size: $size;
+  //font-size: calculateEm($size);
+  font-size: calculateRem($size);
+}
+
+@mixin line-height($size) {
+  line-height: $size;
+  //line-height: calculateEm($size);
+  line-height: calculateRem($size);
+}
+
+@mixin text-shadow($x: 2px, $y: 2px, $blur: 5px, $color: rgba(0,0,0,.4)) {
+	//text-shadow: $x $y $blur $color;
+  @include prefixes(text-shadow, $x $y $blur $color);
+
+}
+
+//
+//   ██████  ██████  ██       ██████  ██████  ███████
+//  ██      ██    ██ ██      ██    ██ ██   ██ ██
+//  ██      ██    ██ ██      ██    ██ ██████  ███████
+//  ██      ██    ██ ██      ██    ██ ██   ██      ██
+//   ██████  ██████  ███████  ██████  ██   ██ ███████
+//
+// @mixin transBg ($color, $opacity) {
+// 	background-color: $color;
+// 	background-color: rgba($color, $opacity);
+// }
+//
+// @mixin transColor ($color, $opacity) {
+// 	color: $color;
+// 	//-moz-opacity: $opacity;
+// 	color: rgba($color, $opacity);
+// }
+//
+// @mixin transBorder ($color, $opacity) {
+// 	border-color: $color;
+// 	border-color: rgba($color, $opacity);
+// }
+
+//
+//   ██████ ███████ ███    ██ ████████ ███████ ██████  ██ ███    ██  ██████
+//  ██      ██      ████   ██    ██    ██      ██   ██ ██ ████   ██ ██
+//  ██      █████   ██ ██  ██    ██    █████   ██████  ██ ██ ██  ██ ██   ███
+//  ██      ██      ██  ██ ██    ██    ██      ██   ██ ██ ██  ██ ██ ██    ██
+//   ██████ ███████ ██   ████    ██    ███████ ██   ██ ██ ██   ████  ██████
+//
+//  VERTICALLY AND HORIZONTALLY CENTER A RELATIVE POSITIONED ELEMENT
+//
+@mixin relativecenter {
+  top: 50%;
+  -webkit-transform: translateY(-50%);
+  -ms-transform: translateY(-50%);
+  transform: translateY(-50%);
+  margin: 0 auto;
+  position: relative;
+}
+
+@mixin centerVert {
+	height: auto;
+	top: 50%;
+	-webkit-transform: translateY(-50%);
+	-ms-transform: translateY(-50%);
+	transform: translateY(-50%);
+  position: relative;
+}
+
+@mixin centerHorz {
+	left: 50%;
+	-webkit-transform: translateX(-50%);
+	-ms-transform: translateX(-50%);
+	transform: translateX(-50%);
+  position: relative;
+}
+
+//
+//  ABSOLUTE CENTERING
+//
+//  EXAMPLE @include center($xy:y); for vertical, absolute
+//
+@mixin center($xy:xy) {
+  @if $xy == xy {
+    left: 50%;
+    top: 50%;
+    bottom: auto;
+    right: auto;
+    @include transform(translateX(-50%) translateY(-50%));
+    position: absolute;
+  }
+  @else if $xy == x {
+    left: 50%;
+    right: auto;
+    @include transform(translateX(-50%));
+    position: absolute;
+  }
+  @else if $xy == y {
+    top: 50%;
+    bottom: auto;
+    @include transform(translateY(-50%));
+    position: absolute;
+  }
+}
+
+@mixin centerCancel {
+	top: inherit !important;
+	right: inherit !important;
+	bottom: inherit !important;
+	left: inherit !important;
+	position: inherit !important;
+  @include prefixes(transform, none !important);
+}
+
+//
+//  ███████ ██   ██  █████  ██████  ███████ ███████
+//  ██      ██   ██ ██   ██ ██   ██ ██      ██
+//  ███████ ███████ ███████ ██████  █████   ███████
+//       ██ ██   ██ ██   ██ ██      ██           ██
+//  ███████ ██   ██ ██   ██ ██      ███████ ███████
+//
+// CLEARFIX
+// sass:
+//		.your-container-with-floated-children {
+//			@extend %clearfix;
+//		}
+//
+%clearfix {
+  *zoom: 1;
+  &:before, &:after {
+    content: " ";
+    display: table;
+  }
+  &:after {
+    clear: both;
+  }
+}
+
+//
+//  CIRCLE from Levenson
+//
+@mixin circle($size, $color, $display) {
+	display: $display;
+	line-height: $size;
+	width: $size;
+	height: $size;
+	background: $color;
+	@include prefixes(border-radius, $size/2);
+}
+
+//
+//  MULTIPLE BORDERS CIRCLE from Levenson (never really got it to work)
+//
+@mixin circles($border: 10px, $outer: red, $middle: blue, $innermost: green) {
+	//
+  //  OUTER CIRCLE
+  //
+  border: $border solid transparent;
+  border-top-color: $outer;
+  @include prefixes(border-radius, 50%);
+  @include animation(spin 1.8s linear infinite);
+
+	//
+  //  MIDDLE CIRCLE
+  //
+  &:before {
+    content: "";
+    position: absolute;
+    top: $border;
+    left: $border;
+    right: $border;
+    bottom: $border;
+    border: $border solid transparent;
+    border-top-color: $middle;
+		@include prefixes(border-radius, 50%);
+    @include animation(reverse-spin 1.4s linear infinite);
+  }
+
+	//
+  //  INNERMOST CIRCLE
+  //
+  &:after {
+    content: "";
+    position: absolute;
+    top: $border * 3;
+    left: $border * 3;
+    right: $border * 3;
+    bottom: $border * 3;
+    border: $border solid transparent;
+    border-top-color: $innermost;
+		@include prefixes(border-radius, 50%);
+    @include animation(spin 1.8s linear infinite);
+  }
+}
+
+// @mixin size($width, $height: $width) {
+// 	width: $width;
+// 	height: $height;
+// }
+
+// @mixin square($size) {
+// 	width: $size;
+// 	height: $size;
+// 	display: block;
+// 	overflow: inherit;
+// }
+
+// @mixin box-shadow ($param) {
+// 	@include prefixes(box-shadow, $param);
+// }
+
+//
+//  BACKGROUND-CLIP
+//
+@mixin bg-clip ($b) {
+@if $b == border-box {
+	-webkit-background-clip: border;  /* Safari 4? Chrome 6? */
+		 -moz-background-clip: border;	/* Firefox 3.6 */
+	@include prefixes(background-clip, $b, 'ms' 'o');
+}
+
+@else if $b == padding-box {
+  -webkit-background-clip: padding;  /* Safari 4? Chrome 6? */
+     -moz-background-clip: padding;     /* Firefox 3.6 */
+  	    background-clip: $b;      /* Firefox 4, Safari 5, Opera 10, IE 9 */
+	@include prefixes(background-clip, $b, 'ms' 'o');
+}
+
+@else if $b == content-box {
+	-webkit-background-clip: content;  /* Safari 4? Chrome 6? */
+		-moz-background-clip: content;     /* Firefox 3.6 */
+	@include prefixes(background-clip, $b, 'ms' 'o');
+	}
+}
+
+//
+//  ██████   ██████  ██████  ██████  ███████ ██████  ███████
+//  ██   ██ ██    ██ ██   ██ ██   ██ ██      ██   ██ ██
+//  ██████  ██    ██ ██████  ██   ██ █████   ██████  ███████
+//  ██   ██ ██    ██ ██   ██ ██   ██ ██      ██   ██      ██
+//  ██████   ██████  ██   ██ ██████  ███████ ██   ██ ███████
+//
+@mixin border-radius($radius:.25em) {
+  @include prefixes(border-radius, $radius);
+}
+
+@mixin border-radius-separate($top-left-radius, $top-right-radius, $bottom-right-radius, $bottom-left-radius) {
+  @include prefixes(border-top-left-radius, $top-left-radius);
+  @include prefixes(border-top-right-radius, $top-right-radius);
+  @include prefixes(border-bottom-right-radius, $bottom-right-radius);
+  @include prefixes(border-bottom-left-radius, $bottom-left-radius);
+}
+
+@mixin border-radius-full{
+  @include prefixes(border-radius, 9999px);
+}
+
+// Box Shadow
+// @param {Size} $x [2px] - X
+// @param {Size} $y [2px] - Y
+// @param {Size} $blur [5px] - Blur
+// @param {Color} $color [rgba(0,0,0,.4)] - Color
+// @param {Boolean} $inset - Inset
+
+@mixin box-shadow($x: 2px, $y: 2px, $blur: 5px, $color: rgba(0,0,0,.4), $inset: "") {
+  @if ($inset != "") {
+    @include prefixes('box-shadow', $inset $x $y $blur $color);
+  } @else {
+    @include prefixes('box-shadow', $x $y $blur $color);
+  }
+}
+
+// Triple Borders
+// @param {Color} $colorOne [#3C3C3C] - Color One
+// @param {Color} $colorTwo [#999999] - Color Two
+// @param {Color} $colorThree [#000000] - Color Three
+// @param {Size} $radius [0] - Radius
+// @require {mixin} border-radius
+// @require {mixin} css3-prefix
+
+@mixin triple-borders($colorOne: #3C3C3C, $colorTwo: #999999, $colorThree: #000000, $radius: 0) {
+	border: 1px solid $colorOne;
+	@include border-radius($radius);
+	@include prefixes('box-shadow', "0 0 0 1px #{$colorTwo}, 0 0 0 2px #{$colorThree}");
+}
+
+// GRADIENT BORDERS
+@mixin gradient-border($color1, $color2, $border-width, $direction) {
+  border: none;
+  background-repeat: no-repeat;
+  background-image: linear-gradient(#{$direction}, $color1 0%, $color2 100%), linear-gradient(#{$direction}, $color1 0%, $color2 100%);
+  @if $direction == 'to right' or $direction == 'to left' {
+    @if $direction == 'to right' {
+      border-left: $border-width solid $color1;
+      border-right: $border-width solid $color2;
+    } @else {
+      border-left: $border-width solid $color2;
+      border-right: $border-width solid $color1;
+    }
+    background-position: 0 0, 0 100%;
+    background-size: 100% $border-width;
+  }
+
+  @if $direction == 'to top' or $direction == 'to bottom' {
+    @if $direction == 'to top' {
+      border-top: $border-width solid $color2;
+      border-bottom: $border-width solid $color1;
+    } @else {
+      border-top: $border-width solid $color1;
+      border-bottom: $border-width solid $color2;
+    }
+    background-position: 0 0, 100% 0;
+    background-size: $border-width 100%;
+  }
+}
+
+//
+// ██████   █████   ██████ ██   ██  ██████  ██████   ██████  ██    ██ ███    ██ ██████  ███████
+// ██   ██ ██   ██ ██      ██  ██  ██       ██   ██ ██    ██ ██    ██ ████   ██ ██   ██ ██
+// ██████  ███████ ██      █████   ██   ███ ██████  ██    ██ ██    ██ ██ ██  ██ ██   ██ ███████
+// ██   ██ ██   ██ ██      ██  ██  ██    ██ ██   ██ ██    ██ ██    ██ ██  ██ ██ ██   ██      ██
+// ██████  ██   ██  ██████ ██   ██  ██████  ██   ██  ██████   ██████  ██   ████ ██████  ███████
+//
+
+//
+// http://alssndro.github.io/trianglify-background-generator/
+//
+
+//
+// https://www.svgbackgrounds.com/
+//
+
+//
+// https://halftonepro.com/app/polygons#
+//
+
+//
+// http://www.colorzilla.com/gradient-editor/
+//
+
+//
+// https://trianglify.io/
+//
+
+//
+// !!!!!!!!!!! THIS ONE PROVIDES COMPASS SASS
+// https://www.cssmatic.com/gradient-generator
+//
+//
+// FOR CREATING AN OPAQUE OVERLAY ON TOP OF A BACKGROUND
+//
+@mixin dark-overlay($color, $opacity) {
+  position: relative;
+
+  &:before {
+		content: " ";
+		position: absolute;
+		top: 0;
+		right: 0;
+		bottom: 0;
+		left: 0;
+		background: rgba($color, $opacity);
+		z-index: 0;
+	}
+}
+
+@mixin light-overlay($color, $opacity) {
+  position: relative;
+  z-index: 0;
+
+  &:before {
+		content: " ";
+		position: absolute;
+		top: 0;
+		right: 0;
+		bottom: 0;
+		left: 0;
+		background: rgba($color, $opacity);
+		z-index: 0;
+	}
+}
+
+@mixin background-gradient-v($startColor: #3C3C3C, $endColor: #999999) {
+	background-color: $startColor;
+	background-image: -webkit-gradient(linear, left top, left bottom, from($startColor), to($endColor));
+	background-image: -webkit-linear-gradient(top, $startColor, $endColor);
+	background-image:    -moz-linear-gradient(top, $startColor, $endColor);
+	background-image:     -ms-linear-gradient(top, $startColor, $endColor);
+	background-image:      -o-linear-gradient(top, $startColor, $endColor);
+	background-image:         linear-gradient(top, $startColor, $endColor);
+	filter:           progid:DXImageTransform.Microsoft.gradient(startColorStr='#{$startColor}', endColorStr='#{$endColor}');
+}
+
+// Background Horizontal Gradient
+// @param {Color} $startColor [#3C3C3C] - Start Color
+// @param {Color} $endColor [#999999] - End Color
+
+@mixin background-graident-h($startColor: #3C3C3C, $endColor: #999999) {
+	background-color: $startColor;
+	background-image: -webkit-gradient(linear, left top, right top, from($startColor), to($endColor));
+	background-image: -webkit-linear-gradient(left, $startColor, $endColor);
+	background-image:    -moz-linear-gradient(left, $startColor, $endColor);
+	background-image:     -ms-linear-gradient(left, $startColor, $endColor);
+	background-image:      -o-linear-gradient(left, $startColor, $endColor);
+	background-image:         linear-gradient(left, $startColor, $endColor);
+	filter:            progid:DXImageTransform.Microsoft.gradient(startColorStr='#{$startColor}', endColorStr='#{$endColor}', gradientType='1');
+}
+
+// Background Radial Gradient
+// @param {Color} $startColor [#3C3C3C] - Start Color
+// @param {Percentage} $startPos [0%] - Start position
+// @param {Color} $endColor [#999999] - End Color
+// @param {Percentage} $endPos [100%] - End position
+
+@mixin background-radial($startColor: #FFFFFF, $startPos: 0%, $endColor: #000000, $endPos:100%) {
+	background: -moz-radial-gradient(center, ellipse cover, $startColor $startPos, $endColor $endPos);
+	background: -webkit-gradient(radial, center center, 0px, center center, 100%, color-stop($startPos,$startColor), color-stop($endPos,$endColor));
+	background: -webkit-radial-gradient(center, ellipse cover, $startColor $startPos,$endColor $endPos);
+	background: -o-radial-gradient(center, ellipse cover, $startColor $startPos,$endColor $endPos);
+	background: -ms-radial-gradient(center, ellipse cover, $startColor $startPos,$endColor $endPos);
+	background: radial-gradient(ellipse at center, $startColor $startPos,$endColor $endPos);
+}
+
+@mixin green-waves {
+  color: #fff;
+  background-color: #004520;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='268' height='32.2' viewBox='0 0 1000 120'%3E%3Cg fill='none' stroke='%23004d24' stroke-width='9.5' %3E%3Cpath d='M-500 75c0 0 125-30 250-30S0 75 0 75s125 30 250 30s250-30 250-30s125-30 250-30s250 30 250 30s125 30 250 30s250-30 250-30'/%3E%3Cpath d='M-500 45c0 0 125-30 250-30S0 45 0 45s125 30 250 30s250-30 250-30s125-30 250-30s250 30 250 30s125 30 250 30s250-30 250-30'/%3E%3Cpath d='M-500 105c0 0 125-30 250-30S0 105 0 105s125 30 250 30s250-30 250-30s125-30 250-30s250 30 250 30s125 30 250 30s250-30 250-30'/%3E%3Cpath d='M-500 15c0 0 125-30 250-30S0 15 0 15s125 30 250 30s250-30 250-30s125-30 250-30s250 30 250 30s125 30 250 30s250-30 250-30'/%3E%3Cpath d='M-500-15c0 0 125-30 250-30S0-15 0-15s125 30 250 30s250-30 250-30s125-30 250-30s250 30 250 30s125 30 250 30s250-30 250-30'/%3E%3Cpath d='M-500 135c0 0 125-30 250-30S0 135 0 135s125 30 250 30s250-30 250-30s125-30 250-30s250 30 250 30s125 30 250 30s250-30 250-30'/%3E%3C/g%3E%3C/svg%3E");
+}
+
+@mixin blue-waves {
+  color: #fff;
+  background-color: #1b3743;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='268' height='32.2' viewBox='0 0 1000 120'%3E%3Cg fill='none' stroke='%23224655' stroke-width='9.5' %3E%3Cpath d='M-500 75c0 0 125-30 250-30S0 75 0 75s125 30 250 30s250-30 250-30s125-30 250-30s250 30 250 30s125 30 250 30s250-30 250-30'/%3E%3Cpath d='M-500 45c0 0 125-30 250-30S0 45 0 45s125 30 250 30s250-30 250-30s125-30 250-30s250 30 250 30s125 30 250 30s250-30 250-30'/%3E%3Cpath d='M-500 105c0 0 125-30 250-30S0 105 0 105s125 30 250 30s250-30 250-30s125-30 250-30s250 30 250 30s125 30 250 30s250-30 250-30'/%3E%3Cpath d='M-500 15c0 0 125-30 250-30S0 15 0 15s125 30 250 30s250-30 250-30s125-30 250-30s250 30 250 30s125 30 250 30s250-30 250-30'/%3E%3Cpath d='M-500-15c0 0 125-30 250-30S0-15 0-15s125 30 250 30s250-30 250-30s125-30 250-30s250 30 250 30s125 30 250 30s250-30 250-30'/%3E%3Cpath d='M-500 135c0 0 125-30 250-30S0 135 0 135s125 30 250 30s250-30 250-30s125-30 250-30s250 30 250 30s125 30 250 30s250-30 250-30'/%3E%3C/g%3E%3C/svg%3E");
+}
+
+@mixin blue-waves-light {
+  background-color: #31657a;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='250' height='30' viewBox='0 0 1000 120'%3E%3Cg fill='none' stroke='%23444444' stroke-width='10.3' stroke-opacity='0.14'%3E%3Cpath d='M-500%2C75c0%2C0%2C125-30%2C250-30S0%2C75%2C0%2C75s125%2C30%2C250%2C30s250-30%2C250-30s125-30%2C250-30s250%2C30%2C250%2C30s125%2C30%2C250%2C30s250-30%2C250-30'/%3E%3Cpath d='M-500%2C45c0%2C0%2C125-30%2C250-30S0%2C45%2C0%2C45s125%2C30%2C250%2C30s250-30%2C250-30s125-30%2C250-30s250%2C30%2C250%2C30s125%2C30%2C250%2C30s250-30%2C250-30'/%3E%3Cpath d='M-500%2C105c0%2C0%2C125-30%2C250-30S0%2C105%2C0%2C105s125%2C30%2C250%2C30s250-30%2C250-30s125-30%2C250-30s250%2C30%2C250%2C30s125%2C30%2C250%2C30s250-30%2C250-30'/%3E%3Cpath d='M-500%2C15c0%2C0%2C125-30%2C250-30S0%2C15%2C0%2C15s125%2C30%2C250%2C30s250-30%2C250-30s125-30%2C250-30s250%2C30%2C250%2C30s125%2C30%2C250%2C30s250-30%2C250-30'/%3E%3Cpath d='M-500-15c0%2C0%2C125-30%2C250-30S0-15%2C0-15s125%2C30%2C250%2C30s250-30%2C250-30s125-30%2C250-30s250%2C30%2C250%2C30s125%2C30%2C250%2C30s250-30%2C250-30'/%3E%3Cpath d='M-500%2C135c0%2C0%2C125-30%2C250-30S0%2C135%2C0%2C135s125%2C30%2C250%2C30s250-30%2C250-30s125-30%2C250-30s250%2C30%2C250%2C30s125%2C30%2C250%2C30s250-30%2C250-30'/%3E%3C/g%3E%3C/svg%3E");
+}
+
+@mixin green-squares {
+  color: #fff;
+	background-color: #006a31;
+	background-image: url("data:image/svg+xml,%3Csvg width='70' height='70' viewBox='0 0 70 70' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%2300853e' fill-opacity='0.3' fill-rule='evenodd'%3E%3Cpath d='M0 0h35v35H0V0zm5 5h25v25H5V5zm5 5h15v15H10V10zm5 5h5v5h-5v-5zM40 5h25v25H40V5zm5 5h15v15H45V10zm5 5h5v5h-5v-5zM70 35H35v35h35V35zm-5 5H40v25h25V40zm-5 5H45v15h15V45zm-5 5h-5v5h5v-5zM30 40H5v25h25V40zm-5 5H10v15h15V45zm-5 5h-5v5h5v-5z'/%3E%3C/g%3E%3C/svg%3E");
+}
+
+@mixin blue-squares {
+  color: #fff;
+	background-color: #1b3743;
+	background-image: url("data:image/svg+xml,%3Csvg width='70' height='70' viewBox='0 0 70 70' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%23224655' fill-opacity='0.3' fill-rule='evenodd'%3E%3Cpath d='M0 0h35v35H0V0zm5 5h25v25H5V5zm5 5h15v15H10V10zm5 5h5v5h-5v-5zM40 5h25v25H40V5zm5 5h15v15H45V10zm5 5h5v5h-5v-5zM70 35H35v35h35V35zm-5 5H40v25h25V40zm-5 5H45v15h15V45zm-5 5h-5v5h5v-5zM30 40H5v25h25V40zm-5 5H10v15h15V45zm-5 5h-5v5h5v-5z'/%3E%3C/g%3E%3C/svg%3E");
+}
+
+@mixin mosaic-white {
+  background-color: #ffffff;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' width='72' height='36' viewBox='0 0 72 36'%3E%3Cdefs%3E%3Crect stroke='%23ffffff' stroke-width='0.1' width='1' height='1' id='s'/%3E%3Cpattern id='a' width='2' height='2' patternUnits='userSpaceOnUse'%3E%3Cg stroke='%23ffffff' stroke-width='0.1'%3E%3Crect fill='%23fafafa' width='1' height='1'/%3E%3Crect fill='%23ffffff' width='1' height='1' x='1' y='1'/%3E%3Crect fill='%23f5f5f5' width='1' height='1' y='1'/%3E%3Crect fill='%23f0f0f0' width='1' height='1' x='1'/%3E%3C/g%3E%3C/pattern%3E%3Cpattern id='b' width='5' height='11' patternUnits='userSpaceOnUse'%3E%3Cg fill='%23ebebeb'%3E%3Cuse xlink:href='%23s' x='2' y='0'/%3E%3Cuse xlink:href='%23s' x='4' y='1'/%3E%3Cuse xlink:href='%23s' x='1' y='2'/%3E%3Cuse xlink:href='%23s' x='2' y='4'/%3E%3Cuse xlink:href='%23s' x='4' y='6'/%3E%3Cuse xlink:href='%23s' x='0' y='8'/%3E%3Cuse xlink:href='%23s' x='3' y='9'/%3E%3C/g%3E%3C/pattern%3E%3Cpattern id='c' width='7' height='7' patternUnits='userSpaceOnUse'%3E%3Cg fill='%23e5e5e5'%3E%3Cuse xlink:href='%23s' x='1' y='1'/%3E%3Cuse xlink:href='%23s' x='3' y='4'/%3E%3Cuse xlink:href='%23s' x='5' y='6'/%3E%3Cuse xlink:href='%23s' x='0' y='3'/%3E%3C/g%3E%3C/pattern%3E%3Cpattern id='d' width='11' height='5' patternUnits='userSpaceOnUse'%3E%3Cg fill='%23ffffff'%3E%3Cuse xlink:href='%23s' x='1' y='1'/%3E%3Cuse xlink:href='%23s' x='6' y='3'/%3E%3Cuse xlink:href='%23s' x='8' y='2'/%3E%3Cuse xlink:href='%23s' x='3' y='0'/%3E%3Cuse xlink:href='%23s' x='0' y='3'/%3E%3C/g%3E%3Cg fill='%23e0e0e0'%3E%3Cuse xlink:href='%23s' x='8' y='3'/%3E%3Cuse xlink:href='%23s' x='4' y='2'/%3E%3Cuse xlink:href='%23s' x='5' y='4'/%3E%3Cuse xlink:href='%23s' x='10' y='0'/%3E%3C/g%3E%3C/pattern%3E%3Cpattern id='e' width='47' height='23' patternUnits='userSpaceOnUse'%3E%3Cg fill='%23006a31'%3E%3Cuse xlink:href='%23s' x='2' y='5'/%3E%3Cuse xlink:href='%23s' x='23' y='13'/%3E%3Cuse xlink:href='%23s' x='4' y='18'/%3E%3Cuse xlink:href='%23s' x='35' y='9'/%3E%3C/g%3E%3C/pattern%3E%3Cpattern id='f' width='61' height='31' patternUnits='userSpaceOnUse'%3E%3Cg fill='%23006a31'%3E%3Cuse xlink:href='%23s' x='16' y='0'/%3E%3Cuse xlink:href='%23s' x='13' y='22'/%3E%3Cuse xlink:href='%23s' x='44' y='15'/%3E%3Cuse xlink:href='%23s' x='12' y='11'/%3E%3C/g%3E%3C/pattern%3E%3C/defs%3E%3Crect fill='url(%23a)' width='72' height='36'/%3E%3Crect fill='url(%23b)' width='72' height='36'/%3E%3Crect fill='url(%23c)' width='72' height='36'/%3E%3Crect fill='url(%23d)' width='72' height='36'/%3E%3Crect fill='url(%23e)' width='72' height='36'/%3E%3Crect fill='url(%23f)' width='72' height='36'/%3E%3C/svg%3E");
+  background-attachment: fixed;
+  background-size: cover;
+}
+
+@mixin mosaic-black {
+  background-color: #111111;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' width='72' height='36' viewBox='0 0 72 36'%3E%3Cdefs%3E%3Crect stroke='%23111111' stroke-width='0.1' width='1' height='1' id='s'/%3E%3Cpattern id='a' width='2' height='2' patternUnits='userSpaceOnUse'%3E%3Cg stroke='%23111111' stroke-width='0.1'%3E%3Crect fill='%23161616' width='1' height='1'/%3E%3Crect fill='%23111111' width='1' height='1' x='1' y='1'/%3E%3Crect fill='%231b1b1b' width='1' height='1' y='1'/%3E%3Crect fill='%231f1f1f' width='1' height='1' x='1'/%3E%3C/g%3E%3C/pattern%3E%3Cpattern id='b' width='5' height='11' patternUnits='userSpaceOnUse'%3E%3Cg fill='%23242424'%3E%3Cuse xlink:href='%23s' x='2' y='0'/%3E%3Cuse xlink:href='%23s' x='4' y='1'/%3E%3Cuse xlink:href='%23s' x='1' y='2'/%3E%3Cuse xlink:href='%23s' x='2' y='4'/%3E%3Cuse xlink:href='%23s' x='4' y='6'/%3E%3Cuse xlink:href='%23s' x='0' y='8'/%3E%3Cuse xlink:href='%23s' x='3' y='9'/%3E%3C/g%3E%3C/pattern%3E%3Cpattern id='c' width='7' height='7' patternUnits='userSpaceOnUse'%3E%3Cg fill='%23292929'%3E%3Cuse xlink:href='%23s' x='1' y='1'/%3E%3Cuse xlink:href='%23s' x='3' y='4'/%3E%3Cuse xlink:href='%23s' x='5' y='6'/%3E%3Cuse xlink:href='%23s' x='0' y='3'/%3E%3C/g%3E%3C/pattern%3E%3Cpattern id='d' width='11' height='5' patternUnits='userSpaceOnUse'%3E%3Cg fill='%23111111'%3E%3Cuse xlink:href='%23s' x='1' y='1'/%3E%3Cuse xlink:href='%23s' x='6' y='3'/%3E%3Cuse xlink:href='%23s' x='8' y='2'/%3E%3Cuse xlink:href='%23s' x='3' y='0'/%3E%3Cuse xlink:href='%23s' x='0' y='3'/%3E%3C/g%3E%3Cg fill='%232e2e2e'%3E%3Cuse xlink:href='%23s' x='8' y='3'/%3E%3Cuse xlink:href='%23s' x='4' y='2'/%3E%3Cuse xlink:href='%23s' x='5' y='4'/%3E%3Cuse xlink:href='%23s' x='10' y='0'/%3E%3C/g%3E%3C/pattern%3E%3Cpattern id='e' width='47' height='23' patternUnits='userSpaceOnUse'%3E%3Cg fill='%2396b886'%3E%3Cuse xlink:href='%23s' x='2' y='5'/%3E%3Cuse xlink:href='%23s' x='23' y='13'/%3E%3Cuse xlink:href='%23s' x='4' y='18'/%3E%3Cuse xlink:href='%23s' x='35' y='9'/%3E%3C/g%3E%3C/pattern%3E%3Cpattern id='f' width='61' height='31' patternUnits='userSpaceOnUse'%3E%3Cg fill='%2396b886'%3E%3Cuse xlink:href='%23s' x='16' y='0'/%3E%3Cuse xlink:href='%23s' x='13' y='22'/%3E%3Cuse xlink:href='%23s' x='44' y='15'/%3E%3Cuse xlink:href='%23s' x='12' y='11'/%3E%3C/g%3E%3C/pattern%3E%3C/defs%3E%3Crect fill='url(%23a)' width='72' height='36'/%3E%3Crect fill='url(%23b)' width='72' height='36'/%3E%3Crect fill='url(%23c)' width='72' height='36'/%3E%3Crect fill='url(%23d)' width='72' height='36'/%3E%3Crect fill='url(%23e)' width='72' height='36'/%3E%3Crect fill='url(%23f)' width='72' height='36'/%3E%3C/svg%3E");
+  background-attachment: fixed;
+  background-size: cover;
+}
+
+@mixin mosaic-blue {
+  background-color: #2d5d71;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' width='72' height='36' viewBox='0 0 72 36'%3E%3Cdefs%3E%3Crect stroke='%232d5d71' stroke-width='0.1' width='1' height='1' id='s'/%3E%3Cpattern id='a' width='2' height='2' patternUnits='userSpaceOnUse'%3E%3Cg stroke='%232d5d71' stroke-width='0.1'%3E%3Crect fill='%23316074' width='1' height='1'/%3E%3Crect fill='%232d5d71' width='1' height='1' x='1' y='1'/%3E%3Crect fill='%23356377' width='1' height='1' y='1'/%3E%3Crect fill='%233a677a' width='1' height='1' x='1'/%3E%3C/g%3E%3C/pattern%3E%3Cpattern id='b' width='5' height='11' patternUnits='userSpaceOnUse'%3E%3Cg fill='%233e6a7c'%3E%3Cuse xlink:href='%23s' x='2' y='0'/%3E%3Cuse xlink:href='%23s' x='4' y='1'/%3E%3Cuse xlink:href='%23s' x='1' y='2'/%3E%3Cuse xlink:href='%23s' x='2' y='4'/%3E%3Cuse xlink:href='%23s' x='4' y='6'/%3E%3Cuse xlink:href='%23s' x='0' y='8'/%3E%3Cuse xlink:href='%23s' x='3' y='9'/%3E%3C/g%3E%3C/pattern%3E%3Cpattern id='c' width='7' height='7' patternUnits='userSpaceOnUse'%3E%3Cg fill='%23426d7f'%3E%3Cuse xlink:href='%23s' x='1' y='1'/%3E%3Cuse xlink:href='%23s' x='3' y='4'/%3E%3Cuse xlink:href='%23s' x='5' y='6'/%3E%3Cuse xlink:href='%23s' x='0' y='3'/%3E%3C/g%3E%3C/pattern%3E%3Cpattern id='d' width='11' height='5' patternUnits='userSpaceOnUse'%3E%3Cg fill='%232d5d71'%3E%3Cuse xlink:href='%23s' x='1' y='1'/%3E%3Cuse xlink:href='%23s' x='6' y='3'/%3E%3Cuse xlink:href='%23s' x='8' y='2'/%3E%3Cuse xlink:href='%23s' x='3' y='0'/%3E%3Cuse xlink:href='%23s' x='0' y='3'/%3E%3C/g%3E%3Cg fill='%23467082'%3E%3Cuse xlink:href='%23s' x='8' y='3'/%3E%3Cuse xlink:href='%23s' x='4' y='2'/%3E%3Cuse xlink:href='%23s' x='5' y='4'/%3E%3Cuse xlink:href='%23s' x='10' y='0'/%3E%3C/g%3E%3C/pattern%3E%3Cpattern id='e' width='47' height='23' patternUnits='userSpaceOnUse'%3E%3Cg fill='%2399abb1'%3E%3Cuse xlink:href='%23s' x='2' y='5'/%3E%3Cuse xlink:href='%23s' x='23' y='13'/%3E%3Cuse xlink:href='%23s' x='4' y='18'/%3E%3Cuse xlink:href='%23s' x='35' y='9'/%3E%3C/g%3E%3C/pattern%3E%3Cpattern id='f' width='61' height='31' patternUnits='userSpaceOnUse'%3E%3Cg fill='%2399abb1'%3E%3Cuse xlink:href='%23s' x='16' y='0'/%3E%3Cuse xlink:href='%23s' x='13' y='22'/%3E%3Cuse xlink:href='%23s' x='44' y='15'/%3E%3Cuse xlink:href='%23s' x='12' y='11'/%3E%3C/g%3E%3C/pattern%3E%3C/defs%3E%3Crect fill='url(%23a)' width='72' height='36'/%3E%3Crect fill='url(%23b)' width='72' height='36'/%3E%3Crect fill='url(%23c)' width='72' height='36'/%3E%3Crect fill='url(%23d)' width='72' height='36'/%3E%3Crect fill='url(%23e)' width='72' height='36'/%3E%3Crect fill='url(%23f)' width='72' height='36'/%3E%3C/svg%3E");
+  background-attachment: fixed;
+  background-size: cover;
+}
+
+@mixin mosaic-green {
+  background-color: #006a31;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' width='72' height='36' viewBox='0 0 72 36'%3E%3Cdefs%3E%3Crect stroke='%23006a31' stroke-width='0.1' width='1' height='1' id='s'/%3E%3Cpattern id='a' width='2' height='2' patternUnits='userSpaceOnUse'%3E%3Cg stroke='%23006a31' stroke-width='0.1'%3E%3Crect fill='%23056d35' width='1' height='1'/%3E%3Crect fill='%23006a31' width='1' height='1' x='1' y='1'/%3E%3Crect fill='%230a7039' width='1' height='1' y='1'/%3E%3Crect fill='%230f733d' width='1' height='1' x='1'/%3E%3C/g%3E%3C/pattern%3E%3Cpattern id='b' width='5' height='11' patternUnits='userSpaceOnUse'%3E%3Cg fill='%23147641'%3E%3Cuse xlink:href='%23s' x='2' y='0'/%3E%3Cuse xlink:href='%23s' x='4' y='1'/%3E%3Cuse xlink:href='%23s' x='1' y='2'/%3E%3Cuse xlink:href='%23s' x='2' y='4'/%3E%3Cuse xlink:href='%23s' x='4' y='6'/%3E%3Cuse xlink:href='%23s' x='0' y='8'/%3E%3Cuse xlink:href='%23s' x='3' y='9'/%3E%3C/g%3E%3C/pattern%3E%3Cpattern id='c' width='7' height='7' patternUnits='userSpaceOnUse'%3E%3Cg fill='%231a7946'%3E%3Cuse xlink:href='%23s' x='1' y='1'/%3E%3Cuse xlink:href='%23s' x='3' y='4'/%3E%3Cuse xlink:href='%23s' x='5' y='6'/%3E%3Cuse xlink:href='%23s' x='0' y='3'/%3E%3C/g%3E%3C/pattern%3E%3Cpattern id='d' width='11' height='5' patternUnits='userSpaceOnUse'%3E%3Cg fill='%23006a31'%3E%3Cuse xlink:href='%23s' x='1' y='1'/%3E%3Cuse xlink:href='%23s' x='6' y='3'/%3E%3Cuse xlink:href='%23s' x='8' y='2'/%3E%3Cuse xlink:href='%23s' x='3' y='0'/%3E%3Cuse xlink:href='%23s' x='0' y='3'/%3E%3C/g%3E%3Cg fill='%231f7c4a'%3E%3Cuse xlink:href='%23s' x='8' y='3'/%3E%3Cuse xlink:href='%23s' x='4' y='2'/%3E%3Cuse xlink:href='%23s' x='5' y='4'/%3E%3Cuse xlink:href='%23s' x='10' y='0'/%3E%3C/g%3E%3C/pattern%3E%3Cpattern id='e' width='47' height='23' patternUnits='userSpaceOnUse'%3E%3Cg fill='%2372ba44'%3E%3Cuse xlink:href='%23s' x='2' y='5'/%3E%3Cuse xlink:href='%23s' x='23' y='13'/%3E%3Cuse xlink:href='%23s' x='4' y='18'/%3E%3Cuse xlink:href='%23s' x='35' y='9'/%3E%3C/g%3E%3C/pattern%3E%3Cpattern id='f' width='61' height='31' patternUnits='userSpaceOnUse'%3E%3Cg fill='%2372ba44'%3E%3Cuse xlink:href='%23s' x='16' y='0'/%3E%3Cuse xlink:href='%23s' x='13' y='22'/%3E%3Cuse xlink:href='%23s' x='44' y='15'/%3E%3Cuse xlink:href='%23s' x='12' y='11'/%3E%3C/g%3E%3C/pattern%3E%3C/defs%3E%3Crect fill='url(%23a)' width='72' height='36'/%3E%3Crect fill='url(%23b)' width='72' height='36'/%3E%3Crect fill='url(%23c)' width='72' height='36'/%3E%3Crect fill='url(%23d)' width='72' height='36'/%3E%3Crect fill='url(%23e)' width='72' height='36'/%3E%3Crect fill='url(%23f)' width='72' height='36'/%3E%3C/svg%3E");
+  background-attachment: fixed;
+  background-size: cover;
+}
+
+@mixin lime-sunrise {
+  // #72B844, #007A39, #005C2A, #002E00
+  color: #fff;
+  background-color: #72b844;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100%25' height='100%25' viewBox='0 0 1600 900'%3E%3Cdefs%3E%3CradialGradient id='a' cx='800' cy='1050' r='1400' gradientUnits='userSpaceOnUse'%3E%3Cstop offset='0' stop-color='%2372b844'/%3E%3Cstop offset='0.3' stop-color='%23007a39'/%3E%3Cstop offset='0.7' stop-color='%23005c2a'/%3E%3Cstop offset='1' stop-color='%23002e00'/%3E%3C/radialGradient%3E%3C/defs%3E%3Crect fill='url(%23a)' width='1600' height='900'/%3E%3C/svg%3E");
+  background-attachment: fixed;
+  background-size: cover;
+  background-position: center;
+}
+
+@mixin blue-gradient {
+  color: #fff;
+  background-color: #ddffcc;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100%25' height='100%25' viewBox='0 0 1600 900'%3E%3Cdefs%3E%3CradialGradient id='a' cx='0' cy='0' r='0%25' gradientUnits='userSpaceOnUse'%3E%3Cstop offset='0' stop-color='%23ddffcc'/%3E%3Cstop offset='1' stop-color='%23067'/%3E%3C/radialGradient%3E%3CradialGradient id='b' cx='0' cy='900' r='1200' gradientUnits='userSpaceOnUse'%3E%3Cstop offset='0' stop-color='%23FFF' stop-opacity='.6'/%3E%3Cstop offset='1' stop-color='%23FFF' stop-opacity='0'/%3E%3C/radialGradient%3E%3CradialGradient id='c' cx='1600' cy='0' r='1200' gradientUnits='userSpaceOnUse'%3E%3Cstop offset='0' stop-color='%23000' stop-opacity='.6'/%3E%3Cstop offset='1' stop-color='%23000' stop-opacity='0'/%3E%3C/radialGradient%3E%3C/defs%3E%3Cg %3E%3Crect fill='url(%23a)' width='1600' height='900'/%3E%3Crect fill='url(%23b)' width='1600' height='900'/%3E%3Crect fill='url(%23c)' width='1600' height='900'/%3E%3C/g%3E%3C/svg%3E");
+  background-attachment: fixed;
+  background-size: cover;
+  background-position: center;
+}
+
+@mixin black-gradient {
+  color: #fff;
+  // Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#111111+0,555555+100
+  background: rgb(17,17,17); /* Old browsers */
+  background: -moz-linear-gradient(45deg,  rgba(17,17,17,1) 0%, rgba(85,85,85,1) 100%); /* FF3.6-15 */
+  background: -webkit-linear-gradient(45deg,  rgba(17,17,17,1) 0%,rgba(85,85,85,1) 100%); /* Chrome10-25,Safari5.1-6 */
+  background: linear-gradient(45deg,  rgba(17,17,17,1) 0%,rgba(85,85,85,1) 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#111111', endColorstr='#555555',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */
+}
+
+@mixin black-sunrise {
+  // http://www.cssportal.com/css-gradient-generator/
+  color: #fff;
+  background-image: -ms-linear-gradient(top, #555555 0%, #000000 100%); // IE10+
+  background-image: -moz-linear-gradient(top, #555555 0%, #000000 100%); // Mozilla Firefox
+  background-image: -o-linear-gradient(top, #555555 0%, #000000 100%); // Opera
+  background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0, #555555), color-stop(100, #000000)); // Webkit (Safari/Chrome 10)
+  background-image: -webkit-linear-gradient(top, #555555 0%, #000000 100%); // Webkit (Chrome 11+)
+  background-image: linear-gradient(to bottom, #555555 0%, #000000 100%); // W3C Markup
+}
+
+@mixin black-gradient-radial {
+  color: #fff;
+  background-color: #444444;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100%25' height='100%25' viewBox='0 0 1600 900'%3E%3Cdefs%3E%3ClinearGradient id='a' gradientUnits='userSpaceOnUse' x1='0' y1='0' x2='100%25' y2='0'%3E%3Cstop offset='0' stop-color='%23000000' stop-opacity='0'/%3E%3Cstop offset='1' stop-color='%23000000'/%3E%3C/linearGradient%3E%3ClinearGradient id='b' gradientUnits='userSpaceOnUse' x1='0' y1='0' x2='0' y2='100%25'%3E%3Cstop offset='0' stop-color='%23000000' stop-opacity='0'/%3E%3Cstop offset='1' stop-color='%23000000'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect fill='url(%23a)' width='1600' height='900'/%3E%3Crect fill='url(%23b)' width='1600' height='900'/%3E%3C/svg%3E");
+  background-attachment: fixed;
+  background-size: cover;
+}
+
+@mixin black-gradient-angle {
+  // http://www.cssportal.com/css-gradient-generator/
+  color: #fff;
+  background-color: #181818;
+  background-image: -ms-linear-gradient(top right, #666666 0%, #050505 100%); // IE10+
+  background-image: -moz-linear-gradient(top right, #666666 0%, #050505 100%); // Mozilla Firefox
+  background-image: -o-linear-gradient(top right, #666666 0%, #050505 100%); // Opera
+  background-image: -webkit-gradient(linear, right top, left bottom, color-stop(0, #666666), color-stop(100, #050505)); // Webkit (Safari/Chrome 10)
+  background-image: -webkit-linear-gradient(top right, #666666 0%, #050505 100%); // Webkit (Chrome 11+)
+  background-image: linear-gradient(to bottom left, #666666 0%, #050505 100%); // W3C Markup
+}
+
+@mixin dark-green-sunrise { // http://www.cssportal.com/css-gradient-generator/
+  color: #fff;
+  background-color: #006a31;
+  background-image: -ms-linear-gradient(top, #00853E 0%, #003618 100%); // IE10+
+  background-image: -moz-linear-gradient(top, #00853E 0%, #003618 100%); // Mozilla Firefox
+  background-image: -o-linear-gradient(top, #00853E 0%, #003618 100%); // Opera
+  background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0, #00853E), color-stop(100, #003618)); // Webkit (Safari/Chrome 10)
+  background-image: -webkit-linear-gradient(top, #00853E 0%, #003618 100%); // Webkit (Chrome 11+)
+  background-image: linear-gradient(to bottom, #00853E 0%, #003618 100%); // W3C Markup
+}
+
+@mixin trianglify-charcoal {
+  // https://trianglify.io/p/w:1440!h:900!x:000000.181818.262626.343434.424242.343434.262626.181818.000000!v:1!c:0.04!s:0.5548471575430511
+  color: #fff;
+  background: url('../../unt_foundation2/images/backgrounds/trianglify-charcoal.svg') center center no-repeat;
+  background-size: cover;
+  background-attachment: fixed;
+}
+
+// @mixin green-triangles {
+//   https://trianglify.io/
+//   https://trianglify.io/p/w:1440!h:900!x:035428.579031.72b844.049031.005025!v:0.659!c:0.03!s:0.9312313375286554
+//   #055429, #569031, #72B843, #019031, #015026 - width: 1440; height: 900;
+// }
+
+@mixin trianglify-green-1 {
+  color: #fff;
+  background: url('../../unt_foundation2/images/backgrounds/trianglify-green-1.svg') center center no-repeat;
+  background-size: cover;
+  background-attachment: fixed;
+}
+
+@mixin trianglify-green-2 {
+  color: #fff;
+  background: url('../../unt_foundation/images/backgrounds/trianglify-green-2.svg') center center no-repeat;
+  background-size: cover;
+  background-attachment: fixed;
+}
+
+@mixin green-target {
+  color: #fff;
+  background-color: #002411;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100%25' height='100%25' viewBox='0 0 800 800'%3E%3Cg fill-opacity='0.16'%3E%3Ccircle fill='%23002411' cx='400' cy='400' r='600'/%3E%3Ccircle fill='%2300361b' cx='400' cy='400' r='500'/%3E%3Ccircle fill='%23004824' cx='400' cy='400' r='400'/%3E%3Ccircle fill='%23005c2d' cx='400' cy='400' r='300'/%3E%3Ccircle fill='%23007036' cx='400' cy='400' r='200'/%3E%3Ccircle fill='%2300853e' cx='400' cy='400' r='100'/%3E%3C/g%3E%3C/svg%3E");
+  background-attachment: fixed;
+  background-size: cover;
+}
+
+@mixin black-green-diamonds {
+  color: #fff;
+  background-color: #fff;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100%25' height='100%25' %3E%3Cdefs%3E%3ClinearGradient id='a' x1='0' x2='0' y1='0' y2='1'%3E%3Cstop offset='0' stop-color='%23004620'/%3E%3Cstop offset='1' stop-color='%23000000'/%3E%3C/linearGradient%3E%3C/defs%3E%3Cpattern id='b' width='24' height='24' patternUnits='userSpaceOnUse'%3E%3Ccircle fill='%23ffffff' cx='12' cy='12' r='12'/%3E%3C/pattern%3E%3Crect width='100%25' height='100%25' fill='url(%23a)'/%3E%3Crect width='100%25' height='100%25' fill='url(%23b)' fill-opacity='0.02'/%3E%3C/svg%3E");
+  background-attachment: fixed;
+  background-size: auto auto;
+}
+
+@mixin black-diamonds {
+  color: #fff;
+  background-color: #000;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100%25' height='100%25' %3E%3Cdefs%3E%3ClinearGradient id='a' x1='0' x2='0' y1='0' y2='1'%3E%3Cstop offset='0' stop-color='%23333333'/%3E%3Cstop offset='1' stop-color='%23000000'/%3E%3C/linearGradient%3E%3C/defs%3E%3Cpattern id='b' width='24' height='24' patternUnits='userSpaceOnUse'%3E%3Ccircle fill='%23ffffff' cx='12' cy='12' r='12'/%3E%3C/pattern%3E%3Crect width='100%25' height='100%25' fill='url(%23a)'/%3E%3Crect width='100%25' height='100%25' fill='url(%23b)' fill-opacity='0.03'/%3E%3C/svg%3E");
+  background-attachment: fixed;
+  background-size: auto auto;
+}
+
+@mixin green-blotches {
+  color: #fff;
+  background-color: #00391a;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='1892' height='1892' viewBox='0 0 800 800'%3E%3Cpath fill='%2300853e' fill-opacity='0.07' d='M619.1%2C642.1c12.9-8.4%2C24.9-18.2%2C35.9-29.3c47.5-48.5%2C86.7-116.3%2C90.8-185.1c1.6-26.2-1.7-52.5-9.5-77.4 c-42.4-136.6-187.1-210.6-316.5-239.5C350.5%2C95.3%2C286.2%2C91%2C218%2C118.5c-35.6%2C14.4-67.8%2C36.8-93.9%2C64.9 C96%2C213.7%2C77.7%2C250.9%2C55.5%2C285.3c-12.1%2C18.8-24.3%2C38.8-24.5%2C61.9c-0.2%2C17.9%2C7%2C22.6%2C19.3%2C33.9c14%2C12.8%2C25.4%2C28.3%2C33.1%2C45.8 c16.1%2C36.5%2C15.6%2C78.2%2C27.2%2C116.4c16.4%2C54.1%2C57.2%2C99%2C106%2C125.9s73.1%2C26.3%2C144.3%2C19.2c43.3-4.3%2C86.8%2C1.2%2C129.8-3.3 C535.7%2C680.4%2C581%2C667%2C619.1%2C642.1z'/%3E%3Cpath fill='%232b9240' fill-opacity='0.07' d='M254.1%2C143.5c-29.4%2C12.6-56.6%2C30.1-79.8%2C51.8c-87.9%2C82.3-99.8%2C209-92%2C322.5c3.5%2C50.9%2C21.6%2C104.6%2C63.7%2C133.4 c31.3%2C21.4%2C70.2%2C25.4%2C107%2C24.9c38.3-0.5%2C77.4-0.8%2C115.3-6.8c46.9-7.5%2C92.1-21.9%2C137.5-35.2c79-23.1%2C160.2-54.8%2C212-118.7 c47.2-58.1%2C62.5-139.7%2C42.4-211.5c-18.4-65.5-84.8-73.7-146.5-97.3c-68.6-26.2-130-67.3-201.6-81 C359%2C115.1%2C303.4%2C122.4%2C254.1%2C143.5z'/%3E%3Cpath fill='%23449f41' fill-opacity='0.07' d='M656.6%2C302.5c-35.5-58.4-109.1-169.2-181.7-195.9C315.1%2C47.7%2C136.5%2C158%2C77%2C281.9 C3.3%2C435.3%2C116.6%2C600.3%2C294%2C658.6c94.9%2C31.2%2C256.9%2C27.6%2C319.4-45.2C686.7%2C527.9%2C720.2%2C407.3%2C656.6%2C302.5z'/%3E%3Cpath fill='%235bab43' fill-opacity='0.07' d='M720.5%2C362.4c-14.1-50.8-48.8-94.5-91.7-125.2c-93-66.6-222.1-84.4-333.5-82.5 c-44.7%2C0.8-76.9%2C19.2-104.5%2C54.8c-47.5%2C61.3-64.4%2C147.7-66.5%2C223.6c-0.1%2C4.8-0.2%2C9.5-0.1%2C14.3c1.5%2C149.2%2C183.4%2C288.5%2C267.9%2C258.1 c54.4-19.5%2C77.2-77.7%2C129.4-102.8c51.2-24.7%2C109.8-32.8%2C155.2-69.1c47.3-37.8%2C59.3-114.7%2C44.2-170.2 C720.7%2C363%2C720.6%2C362.7%2C720.5%2C362.4z'/%3E%3Cpath fill='%2372b844' fill-opacity='0.07' d='M437.1%2C617.9c30.3-16.2%2C59.4-34.2%2C91.7-47.6C573%2C552%2C627.3%2C547.9%2C656%2C508.5c25.6-35.1%2C30.3-90.1%2C8.3-145.3 c-47.3-118.8-162-161.6-258.6-183.4c-91.3-20.6-165.3-16.3-209.5%2C50.7c-52.8%2C79.9-108.1%2C315.7%2C70.2%2C401.3 c55.2%2C26.5%2C108.1%2C17%2C149.6-3.2C423.2%2C625.2%2C430.2%2C621.5%2C437.1%2C617.9z'/%3E%3C/svg%3E");
+  background-attachment: fixed;
+  background-repeat: no-repeat;
+}
+
+@mixin green-ripples {
+  color: #fff;
+  background-color: #00401e;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100%25' height='100%25' viewBox='0 0 1600 900'%3E%3Cg fill-opacity='0.13'%3E%3Cpath fill='%23005226' d='M2063.4 368c 1344.5 1289.9-3870.2 1289.9-2526.8 0c 163.5-156.9 620.9-240.3 933.9-264.2c 206.9-15.8 451.8-15.8 658.8 0c 313 23.9 770.5 107.3 934.1 264.2z'/%3E%3Cpath fill='%230a5a29' d='M1843.9 331.6c 280.4 588.3-2367.8 588.3-2087.8 0c 60-126.1 442.8-201.9 731.6-224.9c 195.1-15.6 429.4-15.6 624.5 0c 288.7 23 671.6 98.8 731.7 224.9z'/%3E%3Cpath fill='%2314622c' d='M1665 302c-30 336.6-1699.8 336.6-1730 0c-9.1-101.7 306.7-170.2 570.9-192.2c 182.7-15.3 405.4-15.3 588.1 0c 264.1 22 580 90.5 571 192.2z'/%3E%3Cpath fill='%231d6b2f' d='M1516.4 277.3c-139.4 212.9-1293.2 212.9-1432.8 0c-53.7-82 202.4-143.4 441.6-164.4c 169.6-14.9 379.8-14.9 549.4 0c 239.2 21 495.4 82.4 441.8 164.4z'/%3E%3Cpath fill='%23267332' d='M1390.9 256.5c-173.4 142.1-1008.4 142.1-1181.9 0c-80.5-65.9 122.9-120.4 336.9-140.2c 155.8-14.4 352.3-14.4 508 0c 214 19.8 417.5 74.3 337 140.2z'/%3E%3Cpath fill='%232f7c35' d='M1283.7 238.7c-174.4 97.6-793 97.6-967.4 0c-94-52.6 63.2-100.3 251.7-118.7c 141.1-13.7 322.7-13.7 463.8 0c 188.5 18.4 345.8 66.1 251.9 118.7z'/%3E%3Cpath fill='%23388438' d='M1190.9 223.3c-159.9 68-621.9 68-781.8 0c-97.6-41.5 19.8-82.6 182.7-99.4c 125.6-12.9 290.8-12.9 416.4 0c 162.8 16.8 280.2 57.9 182.7 99.4z'/%3E%3Cpath fill='%23418d3a' d='M1109.8 209.9c-138.1 47.3-481.5 47.3-619.7 0c-93.7-32.1-10.1-66.7 127.1-81.7c 109.3-12 256.2-12 365.5 0c 137.1 15 220.7 49.6 127.1 81.7z'/%3E%3Cpath fill='%234a953c' d='M1038.4 198c-113.2 32.5-363.7 32.5-476.9 0c-84-24.1-28.4-52.3 83.1-65.3c 91.9-10.7 218.7-10.7 310.6 0c 111.5 13 167.2 41.2 83.2 65.3z'/%3E%3Cpath fill='%23549e3e' d='M975 187.5c-87.1 21.5-263 21.5-350.1 0c-70.1-17.3-36.5-39.2 49.4-49.9c 73.5-9.2 177.9-9.2 251.3 0c 85.9 10.8 119.5 32.6 49.4 49.9z'/%3E%3Cpath fill='%235ea740' d='M918.3 178.1c-61.2 13.3-175.6 13.3-236.8 0c-52.8-11.4-35.8-27 24.8-35.2c 53.9-7.2 133.1-7.2 187.1 0c 60.6 8.2 77.7 23.8 24.9 35.2z'/%3E%3Cpath fill='%2368af42' d='M867.4 169.7c-35.9 6.9-99 6.9-134.9 0c-33.1-6.4-26.9-15.7 8.9-20.9c 33.3-4.8 83.9-4.8 117.2 0c 35.7 5.2 41.8 14.5 8.8 20.9z'/%3E%3Cpath fill='%2372b844' d='M821.3 162c-11.7 2-31.1 2-42.8 0c-11.4-2-10.7-5.1 1-6.9c 11.4-1.8 29.5-1.8 40.8 0c 11.7 1.8 12.4 4.9 1 6.9z'/%3E%3C/g%3E%3C/svg%3E");
+  background-attachment: fixed;
+  background-size: cover;
+}
+
+//
+//  █████  ███    ██ ██ ███    ███  █████  ████████ ███████
+// ██   ██ ████   ██ ██ ████  ████ ██   ██    ██    ██
+// ███████ ██ ██  ██ ██ ██ ████ ██ ███████    ██    █████
+// ██   ██ ██  ██ ██ ██ ██  ██  ██ ██   ██    ██    ██
+// ██   ██ ██   ████ ██ ██      ██ ██   ██    ██    ███████
+//
+@mixin fadeIn($length: 2s) {
+  opacity: 0;
+
+  @keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+
+  &.active {
+    opacity: 1;
+    animation-name: fadeIn;
+    animation-duration: $length;
+  }
+}
+
+@mixin fadeOut($length: 3s) {
+  opacity: 1;
+
+  @keyframes fadeOut {
+    from { opacity: 1; }
+    to { opacity: 0; }
+  }
+
+  &.active {
+    opacity: 0;
+    animation-name: fadeOut;
+    animation-duration: $length;
+  }
+}
+
+
+//
+// ██████   █████  ███    ██ ██████   ██████  ███████
+// ██   ██ ██   ██ ████   ██ ██   ██ ██    ██ ██
+// ██████  ███████ ██ ██  ██ ██   ██ ██    ██ ███████
+// ██   ██ ██   ██ ██  ██ ██ ██   ██ ██    ██      ██
+// ██   ██ ██   ██ ██   ████ ██████   ██████  ███████
+//
+
+//////////////////////
+//  RAMDOM USEFULS  //
+//////////////////////
+// TRANSITIONS
+// usage:
+//		a {
+//			color: gray;
+//			@include transition(color .3s ease);
+//				&:hover {
+//					color: black;
+//				}
+//		}
+//
+@mixin transition($args...) {
+  @include prefixes(transition, $args);
+}
+
+@mixin transform($arguments) {
+//   -webkit-transform: $arguments;
+//    -khtml-transform: $arguments;
+//      -moz-transform: $arguments;
+//       -ms-transform: $arguments; // IE9, JUST IN CASE
+//        -o-transform: $arguments;
+//           transform: $arguments;
+  @include prefixes(transform, $arguments);
+}
+
+// CROSS-BROWSER OPACITY
+// usage:
+//		.faded-text {
+//			@include opacity(0.8);
+//		}
+//
+@mixin opacity($opacity) {
+  opacity: $opacity;
+  $opacity-ie: $opacity * 100;
+  filter: alpha(opacity=$opacity-ie); //IE8
+}
+
+// VISUALLY HIDE AN ELEMENT (use instead of display: none; for better accessibility
+// usage:
+//		<b class="visually-hidden">Open the navigation</b>
+//
+// sass:
+//		.visually-hidden {
+//			@extend %visuallyhidden;
+//		}
+//
+
+%visuallyhidden {
+  margin: -1px;
+  padding: 0;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  clip: rect(0, 0, 0, 0);
+  position: absolute;
+}
+
+// BOX MODEL
+// usage:
+//		.sample{
+//			@include box-sizing(border-box);
+//		}
+//
+@mixin box-sizing($box-model) {
+	@include prefixes(box-sizing, $box-model);
+}
+
+//
+// INSET BORDER
+//
+@mixin inset-border($width,$color,$opacity) {
+	outline-size: $width;
+	outline-style: solid;
+	outline-color: rgba($color,$opacity);
+	outline-offset: -$width;
+};

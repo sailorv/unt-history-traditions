@@ -1,0 +1,307 @@
+#main-menu {
+  margin: 0;
+  display: block;
+  min-height: 30px;
+  background: #111;
+
+  @include mobile {
+    display: none;
+  }
+
+  ul.menu {
+    padding: 2px 0 2px 130px;
+
+    li[role='menuitem'] a {
+    color: #fff;
+    font-family: 'Roboto', sans-serif;
+    font-weight: 500;
+    line-height: 1.25em;
+    font-size: 0.75rem;
+    transition: background-color 0.5s;
+    &:hover {
+      background: $dark-green;
+    }
+}
+  }
+
+  .box {
+    margin: 0 auto;
+
+    @include medium {
+      width: $medium;
+    }
+
+    @include large {
+      width: $large;
+    }
+
+    @include xlarge {
+      width: $xlarge;
+    }
+  }
+
+  @include mobile {
+    #main-menu-button {
+      display: none;
+    }
+  }
+
+  @include desktop {
+    #main-menu-button {
+      display: none;
+    }
+  }
+}
+
+.front #main-menu > ul.menu > li.first.leaf { display: none !important; }
+@include desktop {
+  .slicknav_menu {
+    display: none;
+  }
+}
+
+//
+// ███████ ██      ██  ██████ ██   ██ ███    ██  █████  ██    ██
+// ██      ██      ██ ██      ██  ██  ████   ██ ██   ██ ██    ██
+// ███████ ██      ██ ██      █████   ██ ██  ██ ███████ ██    ██
+//      ██ ██      ██ ██      ██  ██  ██  ██ ██ ██   ██  ██  ██
+// ███████ ███████ ██  ██████ ██   ██ ██   ████ ██   ██   ████
+//
+
+@include mobile {
+  .slicknav_menu {
+    width: 100%;
+    height: auto;
+    padding: 0 !important;
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: auto;
+    left: auto;
+    z-index: 100;
+
+    .slicknav_icon {
+      display: none;
+    }
+
+    .slicknav_btn {
+      color: #fff;
+      width: 35px;
+      height: 35px;
+      padding: 0;
+      background: $green;
+      z-index: 102;
+      position: absolute;
+      top: 0;
+      right: 5px;
+      bottom: auto;
+      left: auto;
+      @include transition(0.5s);
+
+      &.slicknav_open,
+      &:hover {
+        background: $dark-green;
+      }
+
+      &:after {
+        content: " ";
+        width: 35px;
+        height: 35px;
+        background: url('//webassets.unt.edu/images/d7foundation/fa-menu.svg') center center no-repeat;
+        background-size: 60%;
+        position: absolute;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+      }
+
+      .slicknav_menutxt {
+        border: none;
+        text-decoration: none;
+        display: none;
+        color: transparent;
+      }
+    }
+
+    .slicknav_nav {
+      width: 100%;
+      margin: 0;
+      padding: 0;
+      background: rgba($dark-green, 0.95);
+      position: absolute;
+      top: 46px;
+      right: 0;
+      bottom: auto;
+      left: auto;
+      z-index: 101;
+
+      li {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+        border-bottom: solid 1px rgba(#fff, 0.25);
+
+        a {
+          color: #fff;
+          text-decoration: none;
+          line-height: 18px;
+          padding: 11px 0 12px 10px;
+          display: block;
+          font-size: 14px;
+          font-weight: 500;
+          font-family: "Open Sans", sans-serif;
+
+          & > a {
+            padding-left: 0;
+          }
+
+          &:hover {
+            background: rgba(#000,.6);
+          }
+        }
+
+        &.slicknav_open {
+          & > a {
+            border-bottom: solid 1px rgba(#fff, 0.25);
+
+            & + ul.menu {
+              margin: 0 0 -1px 0;
+              padding: 0;
+              border-left: solid 10px rgba(#fff,.25);
+            }
+          }
+        }
+
+        &.expanded {
+          & > a {
+            padding: 0;
+          }
+
+          a.slicknav_item {
+            position: relative;
+            padding-right: 0;
+
+            a {
+              padding: 11px 45px 12px 10px;
+            }
+
+            span.slicknav_arrow {
+              position: absolute;
+              @include center($xy:y);
+              right: 0;
+              color: transparent;
+              width: 41px;
+              height: 40px;
+              height: 100%;
+              margin-top: -1px;
+              background-size: 60%;
+              @include transition(0.5s);
+              background-color: rgba($dark-green, 0.2);
+
+              &:hover {
+                background-color: rgba(#000,.15);
+              }
+            }
+          }
+
+          &.slicknav_open {
+            span.slicknav_arrow {
+              background: url('//webassets.unt.edu/images/d7foundation/fa-menu-up.svg') center center no-repeat;
+              background-color: rgba(darken($dark-green,15%), 0.6) !important;
+              border-left: solid 1px #50946d;
+              opacity: 0.85;
+            }
+          }
+
+          &.slicknav_collapsed {
+            span.slicknav_arrow {
+              background: url('//webassets.unt.edu/images/d7foundation/fa-menu-down.svg') center center no-repeat;
+              background-color: rgba(darken($dark-green,15%), 0.3) !important;
+              border-left: solid 1px #50946d;
+              opacity: 0.75;
+            }
+          }
+        }
+      }
+    }
+  }
+
+  .slicknav_parent.quicklinks-menu {
+    border-top: solid 5px $lime;
+  }
+}
+
+ul.slicknav_nav {
+  li#unt-search {
+
+    form {
+      max-width: calc(100% - 30px);
+      margin: 15px auto;
+    }
+
+    div.form-item {
+      input {
+        margin: 0;
+      }
+    }
+
+    button {
+      margin: 0;
+    }
+  }
+
+  li.mm-ctas-wrapper {
+    .mm-ctas {
+      max-width: calc(100% - 20px);
+      margin: 0 auto 15px auto;
+      display: flex;
+
+      a {
+        background: $green;
+        text-align: center;
+        padding: 10px;
+        margin: 0 5px;
+        text-transform: uppercase;
+        font-size: 10px;
+        font-weight: 600;
+        letter-spacing: 0.025rem;
+        font-family: $open;
+        line-height: 1.25em;
+
+        &.call {
+          &:before {
+            content: "\f095";
+            font-family: $fontawesome;
+            display: block;
+            font-size: 16px;
+            font-weight: 900;
+            margin: 2px 0 8px 0;
+          }
+        }
+
+        &.email {
+          &:before {
+            content: "\f2b6";
+            font-family: $fontawesome;
+            display: block;
+            font-size: 15px;
+            font-weight: 900;
+            margin: 2px 0 8px 0;
+          }
+        }
+
+        &.map {
+          &:before {
+            content: "\f3c5";
+            font-family: $fontawesome;
+            display: block;
+            font-size: 15px;
+            font-weight: 900;
+            margin: 2px 0 8px 0;
+          }
+        }
+      }
+    }
+  }
+}

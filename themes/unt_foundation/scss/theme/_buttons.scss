@@ -1,0 +1,387 @@
+//
+// ██████  ████████ ███    ██ ███████     ██████
+// ██   ██    ██    ████   ██ ██               ██
+// ██████     ██    ██ ██  ██ ███████      █████
+// ██   ██    ██    ██  ██ ██      ██     ██
+// ██████     ██    ██   ████ ███████     ███████
+//
+.btn {
+	display: block;
+	margin: 0 0 3px 0;
+
+	&.inline {
+		display: inline-block;
+
+		// a {
+		// 	margin: 0 5px 0 0;
+		// }
+	}
+
+	&.btn-group {
+		a {
+			display: inline-block;
+			margin: 0 0 4px 0;
+		}
+	}
+
+	&.rounded a {
+		@include border-radius(5px);
+	}
+
+
+	a {
+		font-family: $open;
+		font-size: 13px;
+		font-weight: 600;
+		line-height: 1.1em;
+		padding: 10px 15px 10px 15px;
+		border-width: 2px;
+		border-style: solid;
+		display: inline-block;
+		@include transition(0.5s);
+		text-decoration: none;
+		text-transform: uppercase;
+
+		&:hover, &:focus {
+			text-decoration: none;
+		}
+
+		@include mobile {
+			@include font-size(12px);
+		}
+
+		&:after {
+			content: "\f054";
+			font-family: $fontawesome;
+			font-weight: 900;
+			font-size: .9em;
+			padding-left: 4px;
+		}
+
+		&.phone {
+			&:before {
+				content: "\f095";
+				font-family: $fontawesome;
+				font-weight: 900;
+				font-size: 1.15em;
+				padding-right: 6px;
+			}
+
+			&:after {
+				content: "";
+			}
+		}
+
+		&.pdf {
+			&:before {
+				content: "\f1c1";
+				font-family: $fontawesome;
+				font-weight: 100;
+				font-size: 1.15em;
+				padding-right: 8px;
+			}
+
+			&:after {
+				content: "";
+			}
+		}
+
+		&.txt {
+			&:before {
+				content: "\f15c";
+				font-family: $fontawesome;
+				font-weight: 100;
+				font-size: 1.15em;
+				padding-right: 8px;
+			}
+
+			&:after {
+				content: "";
+			}
+		}
+
+		&.csv {
+			&:before {
+				content: "\f6dd";
+				font-family: $fontawesome;
+				font-weight: 900;
+				font-size: 1.15em;
+				padding-right: 8px;
+			}
+
+			&:after {
+				content: "";
+			}
+		}
+
+		&.email {
+			&:before {
+				content: "\f0e0";
+				font-family: $fontawesome;
+				font-weight: 100;
+				padding-right: 8px;
+				font-size: 1.25em;
+				margin-top: 2px;
+			}
+
+			&:after {
+				content: "";
+			}
+		}
+
+		&.url {
+			&:after {
+				content: "\f35d";
+				font-family: $fontawesome;
+				font-weight: 900;
+				padding-left: 8px;
+			}
+		}
+
+		&.map {
+			&:before {
+				content: "\f3c5";
+				font-family: $fontawesome;
+				font-weight: 900;
+				padding-right: 8px;
+			}
+
+			&:after {
+				content: "";
+			}
+		}
+	}
+
+	&.smaller a {
+		@include font-size(9px);
+		padding: 7px 10px 6px 10px;
+		font-weight: 500;
+
+		&::after {
+			font-size: 8px;
+		}
+	}
+
+	&.small a {
+		@include font-size(10px);
+		padding: 9px 14px 9px 14px;
+		font-weight: 600;
+
+		&::after {
+			font-size: 10px;
+		}
+	}
+
+	&.big a {
+		@include font-size(15px);
+		padding: 13px 20px 13px 20px;
+		font-weight: 600;
+	}
+
+	&.bigger a {
+		@include font-size(17px);
+		padding: 15px 26px 15px 26px;
+		font-weight: 600;
+	}
+
+	&.green a {
+		color: #fff;
+		border-color: $green;
+		background: $green;
+
+		&:hover {
+			border-color: #333;
+			background: #333;
+		}
+	}
+
+	&.lime a {
+		color: #fff;
+		border-color: $bg-lime;
+		background: $bg-lime;
+
+		&:hover {
+			border-color: darken($bg-lime,15%);
+			background: darken($bg-lime,15%);
+		}
+	}
+
+	&.black a {
+		color: #fff;
+		border-color: #333;
+		background: #333;
+
+		&:hover {
+			border-color: #111;
+			background: #111;
+		}
+	}
+
+	&.blue a {
+		color: #fff;
+		border-color: $bg-blue;
+		background: $bg-blue;
+
+		&:hover {
+			border-color: darken($bg-blue,10%);
+			background: darken($bg-blue,10%);
+		}
+	}
+
+	&.white a {
+		color: #333;
+		font-weight: 600;
+		border-color: #fff;
+		background: #fff;
+
+		&:hover {
+			color: #fff;
+			border-color: #333;
+			background: #333;
+		}
+	}
+
+	&.hover-green a {
+		&:hover {
+			color: #fff;
+			border-color: darken($green,5%);
+			background: darken($green,5%);
+		}
+	}
+
+	&.hover-lime a {
+		&:hover {
+			color: #fff;
+			border-color: darken($bg-lime,5%);
+			background: darken($bg-lime,5%);
+		}
+	}
+
+	&.hover-black a {
+		&:hover {
+			color: #fff;
+			border-color: #333;
+			background: #333;
+		}
+	}
+
+	&.hover-blue a {
+		&:hover {
+			color: #fff;
+			border-color: darken($bg-blue,5%);
+			background: darken($bg-blue,5%);
+		}
+	}
+
+	&.hover-white a {
+		&:hover {
+			color: #333;
+			border-color: #fff;
+			background: #fff;
+		}
+	}
+
+	&.ghost {
+		a {
+			color: #333;
+			font-weight: 600;
+		}
+
+		&.green a, &.lime a, &.black a, &.blue a, &.white a {
+			background: transparent;
+		}
+
+		&.green a {
+			color: $green;
+
+			&:hover {
+				color: #fff;
+				background: $green;
+				border-color: $green;
+			}
+		}
+
+		&.lime a {
+			color: $bg-lime;
+			border-color: $bg-lime;
+
+			&:hover {
+				color: #fff;
+				background: $bg-lime;
+				border-color: $bg-lime;
+			}
+		}
+
+		&.black a {
+			color: #333;
+
+			&:hover {
+				color: #fff;
+				background: #333;
+				border-color: #333;
+			}
+		}
+
+		&.blue a {
+			color: darken($bg-blue,5%);
+
+			&:hover {
+				color: #fff;
+				background: $bg-blue;
+				border-color: $bg-blue;
+			}
+		}
+
+		&.white a {
+			color: #fff;
+
+			&:hover {
+				color: #fff;
+				background: #333;
+				border-color: #333;
+			}
+		}
+
+		&.green, &.lime, &.black, &.blue, &.white {
+			&.hover-green a {
+				&:hover {
+					color: #fff;
+					background: darken($green,5%);
+					border-color: darken($green,5%);
+				}
+			}
+
+			&.hover-lime a {
+				&:hover {
+					color: #fff;
+					background: darken($bg-lime,5%);
+					border-color: darken($bg-lime,5%);
+				}
+			}
+
+			&.hover-black a {
+				&:hover {
+					color: #fff;
+					background: #181818;
+					border-color: #181818;
+				}
+			}
+
+			&.hover-blue a {
+				&:hover {
+					color: #fff;
+					background: darken($bg-blue,5%);
+					border-color: darken($bg-blue,5%);
+				}
+			}
+
+			&.hover-white a {
+				&:hover {
+					color: #333;
+					background: #fff;
+					border-color: #fff;
+				}
+			}
+		}
+	}
+}

@@ -1,0 +1,934 @@
+//
+//  ███████  ██████   ██████  ████████ ███████ ██████
+//  ██      ██    ██ ██    ██    ██    ██      ██   ██
+//  █████   ██    ██ ██    ██    ██    █████   ██████
+//  ██      ██    ██ ██    ██    ██    ██      ██   ██
+//  ██       ██████   ██████     ██    ███████ ██   ██
+//
+#footer {
+	position: relative;
+
+	p, ul, ol, li {
+		font-size: 12px;
+
+		@include small { font-size: 11px;}
+	}
+
+	.fa-car {
+		font-size: 1.25em;
+	}
+
+	.visitor-info {
+		line-height: 2rem;
+	}
+
+	h2, h4 {
+		color: lighten($lime,15%);
+		font-family: $roboto-condensed;
+		@include font-size(15px);
+		letter-spacing: 0.05rem;
+		//margin-top: 25px;
+		margin: 0 0 5px 0;
+		font-weight: 500;
+	}
+
+	.footer.box {
+		max-width: 1200px;
+		margin: 0 auto;
+	}
+
+	ul.links, ul.menu {
+		margin: 0 0 0.75rem -5px;
+
+		&.quicklinks {
+			margin-bottom: 1rem;
+		}
+
+		li {
+			list-style: none;
+			margin-bottom: 0;
+			display: inline-block;
+			line-height: 1em;
+			border-right: solid 1px #454545;
+			padding: 0 9px 0 6px;
+
+			&:last-child {
+				padding-right: 0;
+				border-right: none;
+			}
+
+			&:last-child {
+				margin-bottom: 0;
+			}
+
+			a {
+				font-weight: 500;
+				display: inline-block;
+				@include font-size(11px);
+				letter-spacing: 0.05rem;
+				padding: 0;
+				@include transition(0.5s);
+
+				&:hover { &::before {color: #fff;}}
+
+				&::before {
+					display: inline-block;
+					font-family: $fontawesome;
+					margin-right: 6px;
+				}
+
+				&.email { &::before { content: "\f0e0";} }
+				&.phone { &::before { content: "\f095";} }
+				&.tty-phone { &::before { content: "\f1e4";}}
+			}
+		}
+
+		&.last,
+		&:last-child {
+			margin-bottom: 10px;
+			border: none;
+		}
+	}
+
+	.footer-main {
+		color: #efefef;
+		display: block;
+		overflow: hidden;
+		padding: 3em 0;
+		background: #181818;
+
+		@include small-only {
+			padding-top: 2.5rem !important;
+			padding-bottom: 0rem;
+		}
+
+		@include mobile {
+			padding: 20px 0;
+			background: $green;
+		}
+
+		a {
+			color: #fff;
+			text-decoration: none;
+		}
+
+		a:hover, &:focus {
+			color: $lime;
+			text-decoration: underline;
+		}
+	}
+
+	span.address2 {
+		margin-left: -2px;
+	}
+
+	.email-phone {
+		.fas, .fab, .far {
+			margin-right: 5px;
+		}
+	}
+
+//
+// ███████  ██████   ██████  ████████     ██████  ██████   █████  ███    ██ ██████
+// ██      ██    ██ ██    ██    ██        ██   ██ ██   ██ ██   ██ ████   ██ ██   ██
+// █████   ██    ██ ██    ██    ██        ██████  ██████  ███████ ██ ██  ██ ██   ██
+// ██      ██    ██ ██    ██    ██        ██   ██ ██   ██ ██   ██ ██  ██ ██ ██   ██
+// ██       ██████   ██████     ██        ██████  ██   ██ ██   ██ ██   ████ ██████
+//
+	.footer-brand {
+		padding: 0 10px;
+		background: $green;
+		background: transparent;
+		display: block;
+		float: left;
+
+		@include small-only {
+			width: 35%;
+			padding-left: 1rem;
+		}
+
+		@include medium {
+			width: 225px;
+		}
+
+		img {
+			max-width: 205px;
+			display: inline-block;
+		}
+
+		@include mobile {
+			margin-bottom: 0;
+			width: 60%;
+			padding: 0 0 0 10px;
+			display: block;
+			float: left;
+			text-align: center;
+
+			img {
+				max-width: 200px;
+				margin: 0;
+				@include centerHorz;
+			}
+		}
+
+		a {
+			padding: 10px 25px;
+			padding: 0;
+			display: block;
+
+			@include mobile {
+				display: inline-block;
+				width: 96%;
+				margin: 5px 0 0 0;
+			}
+		}
+
+		p.mobile {
+			margin: 15px 0 0 0;
+			text-align: center;
+			text-transform: uppercase;
+
+			a {
+				display: inline-block;
+				font-size: 10px;
+				padding: 5px 10px;
+				background: $lime;
+				font-weight: bold;
+				letter-spacing: .5px;
+			}
+
+			span {
+				padding: 0 5px;
+			}
+		}
+
+		@include mobile {
+			.desktop {
+				display: none;
+			}
+
+			.mobile {
+				display: block;
+			}
+		}
+
+		@include desktop {
+			.desktop {
+				display: block;
+			}
+
+			.mobile {
+				display: none;
+			}
+		}
+	}
+
+//
+// ███████  ██████   ██████  ████████     ███    ███ ███████ ███    ██ ██    ██ ███████
+// ██      ██    ██ ██    ██    ██        ████  ████ ██      ████   ██ ██    ██ ██
+// █████   ██    ██ ██    ██    ██        ██ ████ ██ █████   ██ ██  ██ ██    ██ ███████
+// ██      ██    ██ ██    ██    ██        ██  ██  ██ ██      ██  ██ ██ ██    ██      ██
+// ██       ██████   ██████     ██        ██      ██ ███████ ██   ████  ██████  ███████
+//
+	.footer-menus {
+		@include desktop {
+			display: block;
+			float: left;
+		}
+
+		@include small-only {
+			width: calc(100% - 375px);
+			width: 65%;
+			padding-left: 1rem;
+			padding-right: 1rem;
+		}
+
+		@include medium {
+			width: calc(100% - 525px);
+			padding-left: 1.25rem;
+			padding-right: 1rem;
+		}
+
+		@include mobile {
+			width: 100%;
+			display: none;
+		}
+
+		.quicklinks {
+			h2.block-title {
+				color: #72b844;
+				font-family: "Open Sans", Verdana, sans-serif;
+				font-size: 14px;
+				font-size: 0.875rem;
+				margin-top: 0;
+				font-weight: 600;
+			}
+		}
+	}
+
+//
+// ███████  ██████   ██████  ████████      ██████  ██████  ███    ██ ████████  █████   ██████ ████████
+// ██      ██    ██ ██    ██    ██        ██      ██    ██ ████   ██    ██    ██   ██ ██         ██
+// █████   ██    ██ ██    ██    ██        ██      ██    ██ ██ ██  ██    ██    ███████ ██         ██
+// ██      ██    ██ ██    ██    ██        ██      ██    ██ ██  ██ ██    ██    ██   ██ ██         ██
+// ██       ██████   ██████     ██         ██████  ██████  ██   ████    ██    ██   ██  ██████    ██
+//
+	.footer-contact {
+		text-align: center;
+
+		p {
+			line-height: 1.75em;
+			margin-bottom: 1.5em;
+
+			@include mobile {
+				font-size: 11px;
+			}
+
+			&.map-link {
+				font-size: 8px;
+				margin-bottom: 1.25em;
+			}
+		}
+
+		p.footer-site-name {
+			line-height: 26px;
+			margin: 0 0 15px 0;
+			padding: 0 0.5rem;
+			font-weight: 700;
+			@include font-size(22px);
+			font-family: $open;
+
+			@include mobile {
+				display: none;
+			}
+
+			@include small {
+				padding: 0 0.75rem;
+				@include font-size(18px);
+				line-height: 20px;
+			}
+
+			@include medium {
+				padding: 0 1rem;
+				@include font-size(20px);
+				line-height: 22px;
+			}
+
+			@include large {
+				padding: 0 1.25rem;
+				@include font-size(22px);
+				line-height: 24px;
+			}
+		}
+
+		p.address {
+			margin-bottom: 0;
+			margin: 0;
+			padding: 0;
+			list-style: none;
+
+			@include mobile {
+				display: none;
+			}
+			a {
+				&::before {
+					color: #fff;
+					content: "\f3c5";
+					display: inline-block;
+					font-family: $fontawesome;
+					margin-right: 2px;
+				}
+				&.visitor-info { &::before {
+					content: "\f1b9";
+					margin-right: 5px;
+				} }
+			}
+		}
+
+		#{$a-tags} {
+			color: $lime;
+			font-weight: bold;
+			text-decoration: none;
+		}
+
+		#{$a-tags-hover} {
+			color: #fff;
+			text-decoration: underline;
+		}
+
+		@include desktop {
+			// width: 250px;
+			display: block;
+			float: left;
+		}
+
+		@include small-only {
+			width: calc(100% - 2rem);
+			text-align: left;
+			padding: 2rem 0 0.5rem 0;
+			//margin-top: 1rem;
+			margin: 2rem 1rem 1rem 1rem;
+			border-top: dotted 2px rgba(#fff,.075);
+
+			.footer-site-name {
+				padding-left: 0 !important;
+			}
+		}
+
+		@include medium {
+			width: 300px;
+		}
+
+		@include mobile {
+			width: 40%;
+			padding: 0 10px;
+			display: block;
+			float: left;
+
+			a {
+				display: block;
+				margin: 0 0 4px 0;
+				padding: 6px 0 5px 0;
+				color: #fff !important;
+				font-weight: 600;
+				line-height: 1.5em;
+				background: $dark-green;
+				text-transform: uppercase;
+				font-size: 10px;
+				text-decoration: none;
+
+				.fa {
+					font-size: 16px !important;
+				}
+
+				&:last-child {
+					margin: 0;
+				}
+
+				&:hover, &:focus {
+					background: darker($dark-green,15%);
+					text-decoration: none;
+				}
+			}
+		}
+	}
+
+	@include mobile {
+		padding-bottom: 96px;
+	}
+
+//
+//  ██████ ████████  █████  ███████
+// ██         ██    ██   ██ ██
+// ██         ██    ███████ ███████
+// ██         ██    ██   ██      ██
+//  ██████    ██    ██   ██ ███████
+//
+	.btn-group {
+		padding: 1rem 0;
+
+		@include mobile {
+			padding-top: 0;
+			text-align: center;
+
+			a {
+				// display: block !important;
+				margin-bottom: 0.25rem;
+			}
+		}
+	}
+}
+
+//
+// ███████  ██████   ██████ ██  █████  ██      ███████
+// ██      ██    ██ ██      ██ ██   ██ ██      ██
+// ███████ ██    ██ ██      ██ ███████ ██      ███████
+//      ██ ██    ██ ██      ██ ██   ██ ██           ██
+// ███████  ██████   ██████ ██ ██   ██ ███████ ███████
+//
+.footer-socials {
+	color: #fff;
+	padding: 10px 0.9375em;
+	display: block;
+	background: #2d2c2c;
+	text-align: center;
+	float: none;
+	overflow: hidden;
+
+	.socials-wrapper {
+		height: 40px;
+		display: block;
+		margin: 0;
+		padding: 0;
+		list-style: none;
+
+		li {
+			display: inline-block;
+			list-style: none;
+		}
+	}
+
+	a {
+		width: 40px;
+		height: 40px;
+		line-height: 40px;
+		margin: 0 10px;
+		padding: 0;
+		text-align: center;
+		display: inline-block;
+		color: #efefef;
+		text-decoration: none;
+		@include border-radius(20px);
+		@include transition(0.5s);
+
+		@include mobile {
+			margin: 0;
+		}
+
+		.fa, .fas, .fab, .far {
+			@include font-size(16px);
+			line-height: 40px;
+		}
+
+		img {
+			padding: 0px;
+			width: 30px;
+			height: 30px;
+		}
+
+		.svg-inline--fa {
+			font-size: 1rem;
+			vertical-align: middle;
+		}
+
+		&.facebook {
+			&:hover, &:focus {
+				background: $facebook;
+			}
+		}
+
+		&.twitter {
+			&:hover, &:focus {
+				background: $twitter;
+			}
+		}
+
+		&.youtube {
+			&:hover, &:focus {
+				background: $youtube;
+			}
+		}
+
+		&.instagram {
+			&:hover, &:focus {
+				background: $instagram;
+			}
+		}
+
+		&.flickr {
+			&:hover, &:focus {
+				background: $flickr;
+			}
+		}
+
+		&.vimeo {
+			&:hover, &:focus {
+				background: $vimeo;
+			}
+		}
+
+		&.pinterest {
+			&:hover, &:focus {
+				background: $pinterest;
+			}
+		}
+
+		&.linkedin {
+			&:hover, &:focus {
+				background: $linkedin;
+			}
+		}
+
+		&.mobile {
+			.fa {
+				font-size: 30px;
+				line-height: 36px;
+			}
+
+			&:hover, &:focus {
+				background: $mobile;
+			}
+		}
+
+		&.directory {
+			.fa {
+				font-size: 22px;
+				//line-height: 25px;
+			}
+
+			&:hover, &:focus {
+				background: $directory;
+			}
+		}
+	}
+
+	@include mobile {
+		padding: 0;
+		margin: 1px 0 0 -1px;
+		position: absolute;
+		top: auto;
+		right: 0;
+		bottom: 55px;
+		left: 0;
+		height: 40px;
+		width: 100%;
+		background: #fff;
+
+		.socials-wrapper {
+			display: flex;
+		}
+
+		li {
+			flex: 1;
+			margin: 0 1px 0 0;
+
+			&:last-child {
+				margin-right: 0;
+			}
+		}
+
+		a {
+			text-align: center;
+			display: block;
+			padding: 10px 0;
+			margin: 0 0 0 1px;
+			color: #fff;
+			font-size: 18px;
+			line-height: 18px;
+			border-radius: 0;
+			width: 100%;
+
+			.fa, .fas, .fab, .far {
+				@include font-size(16px);
+				line-height: 16px;
+			}
+
+			img {
+				width: 22px;
+				height: 22px;
+			}
+		}
+
+		.facebook {
+			background: $facebook;
+		}
+
+		.twitter {
+			background: $twitter;
+		}
+
+		.instagram {
+			background: $instagram;
+		}
+
+		.flickr {
+			background: $flickr;
+		}
+
+		.pinterest {
+			background: $pinterest;
+		}
+
+		.youtube {
+			background: $youtube;
+		}
+
+		.vimeo {
+			background: $vimeo;
+		}
+
+		.linkedin {
+			background: $linkedin;
+		}
+
+		.directory {
+			background: $directory;
+		}
+	}
+}
+
+.mobile-ctas.mobile {
+	margin: 0;
+	padding: 0;
+	list-style: none;
+
+	li {
+		display: block;
+		list-style: none;
+		margin: 0 0 4px 0;
+	}
+
+	a {
+		font-family: $roboto;
+		&::before {
+			display: inline-block;
+			font-family: $fontawesome;
+			@include font-size(14px);
+		}
+		&.call-us {
+			&::before { content: "\f095";}
+		}
+		&.email-us {
+			&::before { content: "\f0e0";}
+		}
+		&.unt-map {
+			&::before { content: "\f3c5";}
+		}
+	}
+}
+
+#mobile-socials {
+	display: flex;
+	flex-wrap: nowrap;
+	align-items: stretch;
+	margin: 1px 0 0 -1px;
+	padding: 0;
+
+	@include mobile {
+		display: flex;
+	}
+
+	.tab {
+		flex: 1;
+		text-align: center;
+		display: block;
+		padding: 10px 0;
+		margin: 0 0 0 1px;
+		color: #fff;
+		font-size: 18px;
+		line-height: 18px;
+	}
+
+	.facebook {
+		background: $facebook;
+	}
+
+	.twitter {
+		background: $twitter;
+	}
+
+	.instagram {
+		background: $instagram;
+	}
+
+	.flickr {
+		background: $flickr;
+	}
+
+	.pinterest {
+		background: $pinterest;
+	}
+
+	.youtube {
+		background: $youtube;
+	}
+
+	.vimeo {
+		background: $vimeo;
+	}
+
+	.linkedin {
+		background: $linkedin;
+	}
+
+	.directory {
+		background: $directory;
+	}
+}
+
+//
+//  ██████  ██████  ██████  ██    ██ ██████  ██  ██████  ██   ██ ████████
+// ██      ██    ██ ██   ██  ██  ██  ██   ██ ██ ██       ██   ██    ██
+// ██      ██    ██ ██████    ████   ██████  ██ ██   ███ ███████    ██
+// ██      ██    ██ ██         ██    ██   ██ ██ ██    ██ ██   ██    ██
+//  ██████  ██████  ██         ██    ██   ██ ██  ██████  ██   ██    ██
+//
+.copyright {
+	display: block;
+	clear: both;
+	width: 100%;
+	padding: 0 0 1em 0;
+	text-align: center;
+
+	p {
+		font-weight: bold;
+	}
+
+	ul.footer-copylinks {
+		margin: 0;
+		padding: 0;
+		list-style: none;
+
+		li {
+			margin: 0;
+			padding: 0;
+			list-style: none;
+			display: inline-block;
+			// border-right: solid 1.5px #666;
+
+			&:after {
+				content: "|";
+				color: #666;
+				font-size: 16px;
+				margin: 0 1px 0 3.5px;
+			}
+
+			&:last-child {
+				&:after {
+					margin: 0;
+					content: "";
+				}
+			}
+		}
+	}
+
+	a {
+		margin: 0 0 10px 0;
+		line-height: 16px;
+		font-weight: bold;
+		@include font-size(12px);
+
+		&:last-child {
+			margin-bottom: 0;
+		}
+	}
+
+	#{$a-tags} {
+		color: $green;
+	}
+
+
+	#{$a-tags-hover} {
+		color: $black;
+		text-decoration: underline;
+	}
+
+	.btn.btn-group {
+		margin: 0;
+		padding: 0;
+		list-style: none;
+
+		li {
+			margin: 0;
+			padding: 0;
+			list-style: none;
+			display: inline-block;
+		}
+	}
+
+	@include mobile {
+		height: 55px;
+		padding: 10px;
+		display: block;
+		position: absolute;
+		top: auto;
+		right: 0;
+		bottom: 0;
+		left: 0;
+
+		.footer-copylinks {
+			display: none;
+		}
+
+		p {
+			margin: 0 0 8px 0;
+
+			&:last-child {
+				margin-bottom: 0;
+			}
+		}
+	}
+}
+
+.required-links.mobile {
+	margin-bottom: 0.5rem !important;
+}
+
+
+/* Footer fixes */
+.footer-email a:before {
+    content: "\f0e0";
+    font-family: "Font Awesome 5 Free", "FontAwesome";
+    float: left;
+    font-weight: 900;
+    padding-right: 5px;
+}
+.footer-phone a:before {
+    content: "\f095";
+    font-family: "Font Awesome 5 Free", "FontAwesome";
+    float: left;
+    font-weight: 900;
+    padding-right: 5px;
+}
+.footer-tty a:before {
+    content: "\f1e4";
+    font-family: "Font Awesome 5 Free", "FontAwesome";
+    float: left;
+    font-weight: 900;
+    padding-right: 5px;
+}
+p.address {
+  a.visitor-info:before {
+    content: "\f1b9";
+    color: #fff;
+    font-family: "Font Awesome 5 Free", "fontawesome";
+    font-size: 1.25em;
+    margin-right: 5px;
+  }
+  a.map-location:before {
+    content: "\f3c5";
+    color: #fff;
+    font-family: "Font Awesome 5 Free", "fontawesome";
+    font-size: 1.25em;
+    margin-right: 5px;
+  }
+}
+
+.footer-socials {
+  a:before {
+    font-family: "Font Awesome 5 Brands", "FontAwesome";
+    font-size: 1rem;
+    line-height: 40px;
+  }
+  a.facebook:before {
+    content: "\f39e";
+  }
+  a.twitter:before {
+    content: "\f099";
+  }
+  a.youtube:before {
+    content: "\f167";
+  }
+  a.instagram:before {
+    content: "\f16d";
+  }
+  a.flickr:before {
+    content: "\f16e";
+  }
+  a.directory:before {
+    content: "\f0ca";
+    font-family: "Font Awesome 5 Free", "fontawesome";
+    font-weight: 900;
+  }
+  a .social-description {
+    display: none;
+  }
+}
+
+@media only screen and (max-width: 599px) {
+  .footer-socials {
+    a:before {
+      line-height: 1.3em;
+    }
+  }
+}

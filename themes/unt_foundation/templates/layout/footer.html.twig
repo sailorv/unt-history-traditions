@@ -1,0 +1,102 @@
+<footer id="footer">
+  <div id="footer-main" class="section section-pad">
+    <div class="box wide">
+      <div class="footer-brand" aria-hidden="true">
+        <a class="text-center" href="https://www.unt.edu" aria-hidden="true">
+          <img src="//webassets.unt.edu/images/d7foundation/unt-logo-stacked-green.svg" alt="UNT | University of North Texas | green logo" class="desktop" title="UNT | University of North Texas home page" aria-hidden="true">
+          <img src="//webassets.unt.edu/images/d7foundation/unt-logo-stacked.svg" alt="UNT | University of North Texas | white logo" class="mobile" title="UNT | University of North Texas home page" aria-hidden="true">
+        </a>
+      </div>
+        <div id="footer-socials">
+      		<ul class="socials-wrapper">
+          [Socials list]
+      		</ul>
+      	</div>
+      </div>
+
+      <div id="footer-nav">
+          <div class="footer-nav">
+            <h2>University Links</h2>
+            <ul class="menu">
+    				  <li><a href="//my.unt.edu/" aria-label="MyUNT student portal">MyUNT</a></li>
+    				  <li><a href="//canvas.unt.edu/" aria-label="Canvas classroom portal">Canvas</a></li>
+    				  <li><a href="//eagleconnect.unt.edu/" aria-label="Eagle Connect student email system">EagleConnect</a></li>
+    				  <li><a href="//www.unt.edu/find-people-departments" aria-label="Find People and Departments in the UNT directory">UNT Directory</a></li>
+    				  <li><a href="//maps.unt.edu/" aria-label="Look at the UNT Campus Map">UNT Map</a></li>
+    				  <li><a href="//hr.untsystem.edu/" aria-label="Search for jobs at UNT">Jobs at UNT</a></li>
+            </ul>
+          </div>
+      </div>
+    </div>
+  </div>
+
+  <div id="footer-sub">
+    <div class="section section-pad-small">
+      <div class="box wide">
+        <div id="footer-contact">
+          <h2 class="footer-site-name" aria-hidden="true">[Site name]</h2>
+        </div>
+
+        <div id="footer-copyright" class="footer-nav">
+      		<ul class="menu university-links">
+            <li><a href="//www.unt.edu/disclaimer" aria-label="UNT Disclaimer policy">Disclaimer</a></li>
+            <li><a href="//www.unt.edu/ada" aria-label="UNT AA, EOE and ADA information">AA/EOE/ADA</a></li>
+            <li><a href="//www.unt.edu/privacy" aria-label="UNT Privacy Policy">Privacy</a></li>
+            <li><a href="//policy.unt.edu/policy/14-005" aria-label="UNT Electronic Accessibility policy">Electronic Accessibility</a></li>
+            <li><a href="//www.unt.edu/required-links" aria-label="Link to more information required by the State of Texas">Required Links</a></li>
+            <li><a href="//www.unt.edu" aria-label="Link back to the main UNT website">UNT Home</a></li>
+          </ul>
+      		<p class="copyright"><i class="fas fa-copyright"></i><?php print date("Y") ?> University of North Texas</p>
+      		<p class="mobile required-links"><a href="//www.unt.edu/required-links">Required Links</a><span></p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</footer>
+
+
+  <div class="mobile-ctas mobile" aria-hidden="true">
+    [Replace mobile CTAs]
+  </div>
+
+
+
+<div class="col large-12 centered">
+  <div class="btn btn1 c1 black btn-group text-center footer-ctas">
+    <a href="//admissions.unt.edu" aria-label="Apply to UNT now">Apply now</a>
+    <a href="//tours.unt.edu" aria-label="Schedule a tour of UNT">Schedule a tour</a>
+    <a href="//admissions.unt.edu/requestinfo" aria-label="Get more information about UNT">Get more info</a>
+  </div>
+</div>
+
+
+
+{% if page.footer_first or page.footer_middle or page.footer_last %}
+  <footer class="row">
+    {% if page.footer_first %}
+      <div id="footer-first" class="large-4 columns">
+        {{ page.footer_first }}
+      </div>
+    {% endif %}
+    {% if page.footer_middle %}
+      <div id="footer-middle" class="large-4 columns">
+        {{ page.footer_middle }}
+      </div>
+    {% endif %}
+    {% if page.footer_last %}
+      <div id="footer-last" class="large-4 columns">
+        {{ page.footer_last }}
+      </div>
+    {% endif %}
+  </footer>
+{% endif %}
+{% if block_copyright_show %}
+  <div class="bottom-bar callout secondary large-12 columns">
+    {% if not block_copyright_custom_text %}
+      <p>&copy; {{ "now"|date('Y') }} {{ site_name }} {{ 'All rights reserved.'|t }}</p>
+    {% else %}
+      {{ block_copyright }}
+    {% endif %}
+  </div>
+{% endif %}

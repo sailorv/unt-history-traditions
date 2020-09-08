@@ -1,0 +1,322 @@
+#skip {
+  text-align: center;
+  background: rgba(#000,.5);
+  line-height: 4rem;
+
+  a {
+    color: #fff;
+    margin: 5px 0 !important;
+    background-color: $green !important;
+    padding: 10px 15px;
+    @include border-radius(8px);
+    border: solid 2px #fff;
+  }
+}
+
+header[role="banner"] {
+  display: inline-block;
+  width: 100%;
+  overflow: visible;
+  background: $dark-green;
+
+  @include mobile {
+    position: relative;
+    background: $green;
+  }
+
+  span.hidden-button-text {
+    display: none;
+  }
+
+  .header {
+    height: 45px;
+    position: relative;
+    z-index: 1;
+
+    @include desktop {
+      height: 80px;
+      margin: 0 auto;
+    }
+
+    @include mobile {
+      height: auto;
+      padding-top: 45px;
+
+      #site-name {
+        display: block;
+        width: 100%;
+        height: auto;
+        max-width: 100%;
+        padding: 5px 5px 7px 5px;
+        border-top: solid 1px #fff;
+        @include background-gradient-v(#454545, #000);
+
+        #site-name-wrapper {
+          position: relative;
+          top: auto;
+          right: auto;
+          bottom: auto;
+          left: auto;
+          @include centerCancel;
+
+          h1.site-name {
+            @include font-size(20px);
+            letter-spacing: normal;
+            line-height: 22px;
+            line-height: 24px;
+            font-family: $open;
+            font-family: $oswald;
+            font-weight: 700;
+            font-weight: 300;
+            margin: 2px 2px 5px 2px;
+            margin: 5px 2px 7px 2px;
+            letter-spacing: 0.05rem;
+          }
+        }
+      }
+    }
+
+    @include large {
+      width: $large;
+    }
+
+    @include xlarge {
+      width: $xlarge;
+    }
+  }
+
+  #unt-brand {
+    @include desktop {
+      width: 115px;
+      height: 130px;
+      display: inline-block;
+      background: url('//webassets.unt.edu/images/d7foundation/unt-1890-banner.svg') center center no-repeat;
+      position: absolute;
+      top: 5px;
+      right: auto;
+      bottom: auto;
+      left: 5px;
+    }
+
+    @include mobile {
+      width: 75px;
+      height: 25px;
+      display: inline-block;
+      background: url('//webassets.unt.edu/images/d7foundation/unt_lettermark.svg') center center no-repeat;
+      position: absolute;
+      top: 10px;
+      right: auto;
+      bottom: auto;
+      left: 5px;
+    }
+  }
+
+  #site-name {
+    width: calc(100% - 195px);
+  	max-width: calc(100% - 195px);
+    position: relative;
+    height: 80px;
+    display: inline-block;
+
+    @include small-down {
+      width: calc(100% - 185px);
+    	max-width: calc(100% - 185px);
+    }
+
+    #{$a-tags} {
+      color: #fff;
+      text-decoration: none;
+    }
+
+    #{$a-tags-hover} {
+      text-decoration: underline;
+    }
+
+    #site-name-wrapper {
+      @include center($xy:y);
+      left: 0;
+
+      @include desktop {
+        padding-left: 130px;
+      }
+    }
+
+    span.department-name {
+      display: block;
+      font-weight: 600;
+      font-family: $open;
+      letter-spacing: 0.35px;
+      text-transform: uppercase;
+      padding-left: 1px;
+
+      a {
+        display: block;
+      }
+
+      .scrolled & {
+        display: none;
+      }
+
+      @include mobile {
+        display: none;
+      }
+
+      @include small-only {
+        margin-bottom: 2px;
+        @include font-size(9px);
+        line-height: 10px;
+
+        .long {
+          // margin-bottom: 3px;
+          @include font-size(9px);
+          font-weight: 400;
+        }
+      }
+
+      @include medium-only {
+        margin-bottom: 3px;
+        @include font-size(10px);
+        line-height: 11px;
+
+        .long {
+          margin-bottom: 4px;
+          @include font-size(10px);
+          line-height: 11px;
+          font-weight: 400;
+        }
+      }
+
+      @include large {
+        margin-bottom: 3px;
+        @include font-size(11px);
+        line-height: 12px;
+
+        .long {
+          margin-bottom: 5px;
+          @include font-size(10px);
+          line-height: 11px;
+          font-weight: 500;
+        }
+      }
+    }
+
+    h1.title.site-name {
+      margin: 0;
+      font-family: $open;
+      font-weight: 700;
+
+      @include mobile {
+        @include font-size(20px);
+        line-height: 22px;
+        font-weight: 900;
+      }
+
+      @include small {
+        @include font-size(19px);
+        line-height: 22px;
+
+        &.long {
+          @include font-size(15px);
+          line-height: 17px;
+          font-weight: 600;
+        }
+      }
+
+      @include medium {
+        @include font-size(25px);
+        line-height: 27px;
+
+        &.long {
+          @include font-size(19px);
+          line-height: 20px;
+        }
+      }
+
+      @include large {
+        @include font-size(29px);
+        line-height: 31px;
+
+        &.long {
+          @include font-size(21px);
+          line-height: 24px;
+        }
+      }
+    }
+  }
+
+  #unt-search {
+    @include center($xy:y);
+    right: 5px;
+    left: auto;
+    box-shadow: 0 0 2px rgba(0, 0, 0, 0.35);
+    @include border-radius-separate(0, 3px, 3px, 0);
+
+    h2.element-invisible { display: none; }
+
+    form,
+    form#search-block-form {
+      width: 180px;
+      margin: 0;
+
+      .small-8 {
+        width: 150px;
+
+        input {
+          width: 100%;
+          margin: 0;
+          height: 25px;
+          box-shadow: 0;
+          border: inset solid 1px #777;
+          font-size: 12px;
+        }
+      }
+
+      .small-4 {
+        width: 30px;
+
+        button.postfix {
+          height: 25px;
+          text-indent: -10000px;
+          margin: 0;
+          background: #3c3c3c;
+          background: url('//webassets.unt.edu/images/d7foundation/icon-search.svg') center center no-repeat #3c3c3c;
+          box-shadow: 1px 0 3px rgba(0, 0, 0, 0.2);
+
+          &:hover, &:focus {
+            background-color: $bg-blackish;
+          }
+        }
+      }
+    }
+
+    a {
+      width: 40px;
+      height: 40px;
+      display: inline-block;
+      @include transition(0.5s);
+
+      &:hover, &:focus {
+        background: $green;
+
+        & + form {
+          display: block;
+        }
+      }
+    }
+  }
+}
+
+// ADMINIMAL ADMIN MENU BODY TOP MARGIN FIX FOR WHEN IN ADMIN MODE
+@include mobile {
+  body.adminimal-menu.adminimal-frontend {
+    padding-top: 62px !important;
+
+    .slicknav_menu .slicknav_btn {
+      top: 67px !important;
+    }
+
+    .slicknav_menu .slicknav_nav {
+      top: 108px !important;
+    }
+  }
+}

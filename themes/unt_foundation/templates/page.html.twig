@@ -1,0 +1,261 @@
+{#
+/**
+ * @file
+ * Zurb Foundations's theme implementation to display a single page.
+ *
+ * Available variables:
+ *
+ * General utility variables:
+ * - base_path: The base URL path of the Drupal installation. Will usually be
+ *   "/" unless you have installed Drupal in a sub-directory.
+ * - is_front: A flag indicating if the current page is the front page.
+ * - logged_in: A flag indicating if the user is registered and signed in.
+ * - is_admin: A flag indicating if the user has permission to access
+ *   administration pages.
+ *
+ * Site identity:
+ * - front_page: The URL of the front page. Use this instead of base_path when
+ *   linking to the front page. This includes the language domain or prefix.
+ * - site_slogan: The slogan of the site. This is empty when displaying the site
+ *   slogan has been disabled in theme settings.
+ *
+ * Page content (in order of occurrence in the default page.html.twig):
+ * - messages: Status and error messages. Should be displayed prominently.
+ * - node: Fully loaded node, if there is an automatically-loaded node
+ *   associated with the page and the node ID is the second argument in the
+ *   page's path (e.g. node/12345 and node/12345/revisions, but not
+ *   comment/reply/12345).
+ *
+ * Regions:
+ * - page.meta_header
+ * - page.header
+ * - page.help
+ * - page.highlighted
+ * - page.content
+ * - page.sidebar_first
+ * - page.sidebar_second
+ * - page.footer_first
+ * - page.footer_middle
+ * - page.footer_last
+ *
+ * @see template_preprocess_page()
+ * @see bartik_preprocess_page()
+ * @see html.html.twig
+ */
+#}
+
+<div class="off-canvas-wrapper">
+  <div class="inner-wrap off-canvas-wrapper-inner" id="inner-wrap" data-off-canvas-wrapper>
+    <aside id="left-off-canvas-menu" class="off-canvas left-off-canvas-menu position-left" role="complementary" data-off-canvas>
+      {{ page.left_off_canvas }}
+    </aside>
+
+    <aside id="right-off-canvas-menu" class="off-canvas right-off-canvas-menu position-right" role="complementary" data-off-canvas>
+      {{ page.right_off_canvas }}
+    </aside>
+
+    <div class="off-canvas-content" data-off-canvas-content>
+      {% if page.meta_header %}
+        {% if meta_header_grid %}
+          <div class="row">
+            <div class="large-12 columns">
+        {% endif %}
+        {{ page.meta_header }}
+        {% if meta_header_grid %}
+            </div>
+          </div>
+        {% endif %}
+      {% endif %}
+
+      <header role="banner" aria-label="{{ 'Site header'|t }}">
+        {% if page.header %}
+            {{ page.header }}
+        {% endif %}
+      </header>
+
+      {% if page.hero_feature %}
+        <section id="hero-feature">
+          {{ page.hero_feature }}
+        </section>
+      {% endif %}
+
+      <div class="row">
+        {% if show_account_info %}
+          <div class="{{ site_slogan ? 'large-6' : 'large-4 columns large-offset-8' }} columns hide-for-small">
+            <p>
+              {% if logged_in %}
+                <a href="{{ path('user.page') }}">{{ 'My Account'|t }}</a>
+                <a href="{{ path('user.logout') }}">{{ 'Logout'|t }}</a>
+              {% else %}
+                <a href="{{ path('user.login') }}">{{ 'Login'|t }}</a>
+                <a href="{{ path('user.register') }}">{{ 'Sign Up'|t }}</a>
+              {% endif %}
+            </p>
+          </div>
+        {% endif %}
+        {% if site_slogan %}
+          <div class="large-6 columns hide-for-small">
+            {{ site_slogan }}
+          </div>
+        {% endif %}
+        {% if show_account_info %}
+          <div class="show-for-small">
+            <div class="six mobile-two columns">
+              <p>
+                <a href="{{ path('user.login') }}" class="radius button">{{ 'Login'|t }}</a>
+              </p>
+            </div>
+            <div class="six mobile-two columns">
+              <p>
+                <a href="{{ path('user.register') }}" class="radius success button">{{ 'Sign Up'|t }}</a>
+              </p>
+            </div>
+          </div>
+        {% endif %}
+      </div>
+
+      {% if messages and not zurb_foundation_messages_modal %}
+      <div class="l-messages row">
+        <div class="large-12 columns">
+          {{ messages }}
+        </div>
+      </div>
+      {% endif %}
+
+      {% if page.help %}
+      <div class="l-help row">
+        <div class="large-12 columns">
+          {{ page.help }}
+        </div>
+      </div>
+      {% endif %}
+
+      <div class="row">
+        <main id="main" class="{{ main_grid }} columns" role="main">
+          {% if page.highlighted %}
+            {% apply spaceless %}
+              {{ page.highlighted }}
+            {% endapply %}
+          {% endif %}
+          <a id="main-content"></a>
+          {% if breadcrumb %} {{ breadcrumb }} {% endif %}
+          <section>
+            {{ page.content }}
+          </section>
+        </main>
+        {% if page.sidebar_first %}
+          <div id="sidebar-first" class="{{ sidebar_first_grid }} columns sidebar ">
+            {{ page.sidebar_first }}
+          </div>
+        {% endif %}
+        {% if page.sidebar_second %}
+          <div id="sidebar-second" class="{{ sidebar_sec_grid }} columns sidebar">
+            {{ page.sidebar_second }}
+          </div>
+        {% endif %}
+      </div>
+
+      {% if page.below_content %}
+        {{ page.below_content }}
+      {% endif %}
+
+      <footer id="footer">
+  <div class="footer-socials">
+		<ul class="socials-wrapper">
+
+            	<li><a href="https://www.facebook.com/northtexas" class="facebook" title="UNT on facebook" target="_blank" aria-label="UNT on Facebook"><span class="social-description">UNT at Facebook</span></a></li>
+
+							<li><a href="https://twitter.com/UNTSocial" class="twitter" title="Twitter" target="_blank" aria-label="UNT on Twitter"><span class="social-description">Twitter</span></a></li>
+
+							<li><a href="https://www.youtube.com/user/universitynorthtexas" class="youtube" title="YouTube" target="_blank" aria-label="UNT on YouTube"><span class="social-description">YouTube</span></a></li>
+
+
+							<li><a href="https://www.instagram.com/UNT/" class="instagram" title="Instagram" target="_blank" aria-label="UNT on Instagram"><span class="social-description">Instagram</span></a></li>
+
+							<li><a href="https://www.flickr.com/photos/unt" class="flickr" title="flickr" target="_blank" aria-label="UNT on Flickr"><span class="social-description">Flickr</span></a></li>
+
+
+
+			<li><a href="https://social.unt.edu/social-media-directory" class="directory" title="UNT Social Media Directory" aria-label="UNT Social Media directory"><span class="social-description">Directory</span></a></li>
+		</ul>
+	</div>
+
+  <div class="footer-main">
+    <div class="footer box">
+
+      <div class="footer-brand" aria-hidden="true">
+				<a class="text-center" href="https://www.unt.edu" aria-hidden="true">
+					<img src="//webassets.unt.edu/images/d7foundation/unt-logo-stacked-green.svg" alt="UNT | University of North Texas | green logo" class="desktop" title="UNT | University of North Texas home page" aria-hidden="true">
+					<img src="//webassets.unt.edu/images/d7foundation/unt-logo-stacked.svg" alt="UNT | University of North Texas | white logo" class="mobile" title="UNT | University of North Texas home page" aria-hidden="true">
+				</a>
+			</div>
+
+      <div class="footer-menus desktop">
+                  <h2 class="title">University Links</h2>
+          <ul class="menu links quicklinks">
+  				  <li><a href="//my.unt.edu/" aria-label="MyUNT student portal">MyUNT</a></li>
+  				  <li><a href="//canvas.unt.edu/" aria-label="Canvas classroom portal">Canvas</a></li>
+  				  <li><a href="//eagleconnect.unt.edu/" aria-label="Eagle Connect student email system">EagleConnect</a></li>
+  				  <li><a href="//www.unt.edu/find-people-departments" aria-label="Find People and Departments in the UNT directory">UNT Directory</a></li>
+  				  <li><a href="//maps.unt.edu/" aria-label="Look at the UNT Campus Map">UNT Map</a></li>
+  				  <li><a href="//hr.untsystem.edu/" aria-label="Search for jobs at UNT">Jobs at UNT</a></li>
+          </ul>
+
+				<h2 class="title">Email &amp; Phone</h2>
+				<ul class="menu links email-phone">
+																		<li class="footer-email"><a href="mailto:undergrad@unt.edu" class="email" aria-label="Send an email to Registration at undergrad@unt.edu">undergrad@unt.edu</a></li>
+
+																		<li class="footer-phone"><a href="tel:940-565-2681" aria-label="Call Registration at 940-565-2681">940-565-2681</a></li>
+																													<li class="footer-tty"><a href="tel:940.369.8652" aria-label="Call the University of North Texas via TTY at 940-369-8652"><span class="show-for-sr">UNT TTY: </span>940-369-8652</a></li>
+				</ul>
+      </div>
+
+      <div class="footer-contact">
+        <p class="footer-site-name" aria-hidden="true">Registration</p>
+
+				<p class="address">
+					<a class="map-location" href="http://maps.unt.edu/places/1017/view" target="_blank" aria-label="Find Eagle Student Services Center, Room 305 on Google Maps">
+
+            Eagle Student Services Center, Room 305</a><br>
+
+					1147 Union Circle										Denton, Texas 76203<br>
+					<a class="visitor-info" href="https://www.unt.edu/community" aria-label="Go to our Visitor Information page">Visitor Information</a></p>
+
+				<ul class="mobile-ctas mobile" aria-hidden="true">
+											<li><a class="call-us" href="tel:940-565-2681">Call us</a></li>
+
+											<li><a class="email-us" href="mailto:undergrad@unt.edu">Email Us</a></li>
+
+                      <li><a class="unt-map" href="http://maps.unt.edu/places/1017/view" title="UNT Map">Map to Eagle Student Services Center, Room 305</a></li>
+
+				</ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="copyright">
+		<div class="col large-12 centered">
+			<ul class="btn green hover-black small btn-group">
+				<li><a href="//admissions.unt.edu" aria-label="Apply to UNT now">Apply now</a></li>
+				<li><a href="//tours.unt.edu" aria-label="Schedule a tour of UNT">Schedule a tour</a></li>
+				<li><a href="//admissions.unt.edu/requestinfo" aria-label="Get more information about UNT">Get more info</a></li>
+			</ul>
+		</div>
+
+		<ul class="footer-copylinks">
+      <li><a href="//www.unt.edu/disclaimer" aria-label="UNT Disclaimer policy">Disclaimer</a></li>
+      <li><a href="//www.unt.edu/ada" aria-label="UNT AA, EOE and ADA information">AA/EOE/ADA</a></li>
+      <li><a href="//www.unt.edu/privacy" aria-label="UNT Privacy Policy">Privacy</a></li>
+      <li><a href="//policy.unt.edu/policy/14-005" aria-label="UNT Electronic Accessibility policy">Electronic Accessibility</a></li>
+      <li><a href="//www.unt.edu/required-links" aria-label="Link to more information required by the State of Texas">Required Links</a></li>
+      <li><a href="//www.unt.edu" aria-label="Link back to the main UNT website">UNT Home</a></li>
+    </ul>
+		<p>&copy; 2020 University of North Texas</p>
+		<p class="mobile required-links"><a href="//www.unt.edu/required-links">Required Links</a><span></span></p>
+	</div>
+
+</footer>
+
+    </div>
+  </div>
+</div>

@@ -1,0 +1,141 @@
+//
+//   ██████  ██████  ██ ██████      ███████ ███████ ████████ ████████ ██ ███    ██  ██████  ███████
+//  ██       ██   ██ ██ ██   ██     ██      ██         ██       ██    ██ ████   ██ ██       ██
+//  ██   ███ ██████  ██ ██   ██     ███████ █████      ██       ██    ██ ██ ██  ██ ██   ███ ███████
+//  ██    ██ ██   ██ ██ ██   ██          ██ ██         ██       ██    ██ ██  ██ ██ ██    ██      ██
+//   ██████  ██   ██ ██ ██████      ███████ ███████    ██       ██    ██ ██   ████  ██████  ███████
+//
+$gutter:	10px;
+$mgutter:	5px;
+
+//
+//  ██████  ██████  ███████  █████  ██   ██ ██████   ██████  ██ ███    ██ ████████ ███████
+//  ██   ██ ██   ██ ██      ██   ██ ██  ██  ██   ██ ██    ██ ██ ████   ██    ██    ██
+//  ██████  ██████  █████   ███████ █████   ██████  ██    ██ ██ ██ ██  ██    ██    ███████
+//  ██   ██ ██   ██ ██      ██   ██ ██  ██  ██      ██    ██ ██ ██  ██ ██    ██         ██
+//  ██████  ██   ██ ███████ ██   ██ ██   ██ ██       ██████  ██ ██   ████    ██    ███████
+//
+$xsmall:	360px;
+$small:		600px;
+$medium:	900px;
+$large:		1200px;
+$xlarge:	1600px;
+$xxlarge: 1800px;
+
+//
+//  ███    ███ ███████ ██████  ██  █████       ██████  ██    ██ ███████ ██████  ██ ███████ ███████
+//  ████  ████ ██      ██   ██ ██ ██   ██     ██    ██ ██    ██ ██      ██   ██ ██ ██      ██
+//  ██ ████ ██ █████   ██   ██ ██ ███████     ██    ██ ██    ██ █████   ██████  ██ █████   ███████
+//  ██  ██  ██ ██      ██   ██ ██ ██   ██     ██ ▄▄ ██ ██    ██ ██      ██   ██ ██ ██           ██
+//  ██      ██ ███████ ██████  ██ ██   ██      ██████   ██████  ███████ ██   ██ ██ ███████ ███████
+//                                                ▀▀
+@mixin xsmall {
+	@media only screen and (max-width: $xsmall) {
+		@content;
+	}
+}
+
+@mixin xsmall-land {
+	@media only screen and (max-width: 480px) and (orientation: landscape) {
+		@content;
+	}
+}
+
+@mixin mobile {
+	@media only screen and (max-width: #{$small - 1px}) {
+		@content;
+	}
+}
+
+@mixin mobile-land {
+	@media only screen and (max-width: 736px) and (orientation: landscape) {
+		@content;
+	}
+}
+
+@mixin desktop {
+	@media only screen and (min-width: #{$small}) {
+		@content;
+	}
+}
+
+@mixin small {
+  @media only screen and (min-width: #{$small}) {
+    @content;
+  }
+}
+
+@mixin small-only {
+  @media only screen and (min-width: #{$small}) and (max-width: #{$medium - 1}) {
+    @content;
+  }
+}
+
+@mixin small-down {
+  @media only screen and (max-width: #{$medium - 1}) {
+    @content;
+  }
+}
+
+@mixin medium {
+  @media only screen and (min-width: #{$medium}) {
+    @content;
+  }
+}
+
+@mixin medium-only {
+  @media only screen and (min-width: #{$medium}) and (max-width: #{$large - 1}) {
+    @content;
+  }
+}
+
+@mixin medium-down {
+  @media only screen and (max-width: #{$large - 1}) {
+    @content;
+  }
+}
+
+@mixin large {
+	@media only screen and (min-width: #{$large}) {
+		@content;
+	}
+}
+
+@mixin large-only {
+  // UNCOMMENT IF USING X-LARGE BREAKPOINT: @media only screen and (min-width: #{$large}) and (max-width: #{$xlarge - 1}) {
+  @media only screen and (min-width: #{$large}) and (max-width: #{$xlarge -1}) {
+    @content;
+  }
+}
+
+@mixin large-down {
+  @media only screen and (max-width: #{$xlarge - 1}) {
+    @content;
+  }
+}
+
+@mixin xlarge {
+	@media only screen and (min-width: #{$xlarge}) {
+		@content;
+	}
+}
+
+@mixin xlarge-only {
+  // UNCOMMENT IF USING X-LARGE BREAKPOINT: @media only screen and (min-width: #{$large}) and (max-width: #{$xlarge - 1}) {
+  @media only screen and (min-width: #{$large}) and (max-width: #{$xlarge -1}) {
+    @content;
+  }
+}
+
+@mixin xlarge-down {
+  @media only screen and (max-width: #{$xxlarge - 1}) {
+    @content;
+  }
+}
+
+
+@mixin xxlarge {
+	@media only screen and (min-width: #{$xxlarge}) {
+		@content;
+	}
+}
